@@ -4,8 +4,6 @@ import About from "./screens/about/About";
 import { Button, Container, Grid, Typography } from "@material-ui/core";
 import Login from "./screens/login/Login";
 
-
-
 const App = () =>{
    const[currentPage,setCurrentPage]=useState("home");
    const handlePageChange = (page) => {
