@@ -3,17 +3,24 @@ import { Fragment } from "react";
 
 
 
-const Home = () =>{
-    return(
+const Home = (props) => {
+    
+    return (
 
         <Fragment>
-             <Typography variant="body1" align="center">
-                Home Page Details
+            <Typography variant="body1" align="center">
+                Welcome : {props.userData.name }
+            </Typography>
+            <Typography>
+                Email   :   {props.userData.email }
+            </Typography>
+            <Typography>
+                gender  :  {props.userData.gender }
             </Typography>
         </Fragment>
     )
 
 
-}
+};
 
 export default Home;
