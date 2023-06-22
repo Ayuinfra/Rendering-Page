@@ -18,7 +18,8 @@ const App = () => {
 
   const handleLogin = (email, password) => {
     const user = userInfo.find(item => item.email === email);
-    if (email===user.email && password === user.password){
+  
+    if (email===user?.email && password === user?.password){
       
       const loggedInUser = userInfo.find((data)=> data.email === email );
       setIsLoggedin(true);
