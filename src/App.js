@@ -18,17 +18,20 @@ const App = () => {
 
   const handleLogin = (email, password) => {
     const user = userInfo.find(item => item.email === email);
-  
-    if (email===user?.email && password === user?.password){
-      
-      const loggedInUser = userInfo.find((data)=> data.email === email );
-      setIsLoggedin(true);
-      setUserData(loggedInUser);
-      setCurrentPage('home');
+    if(user){
+      if (email===user.email && password === user.password){
+          const loggedInUser = userInfo.find((data)=> data.email === email );
+          setIsLoggedin(true);
+          setUserData(loggedInUser);
+          setCurrentPage('home');
+      }
+      else {
+        alert('Invalid email or password');
+      }
     }
-    else {
-      alert('Invalid email or password');
-    }
+   else{
+    alert('User not found')
+   }
   };
 
   const handleLogout = () => {
@@ -60,14 +63,19 @@ const App = () => {
       <Fragment>
         <Grid container direction="column" alignItems="center" spacing={2}>
           <Grid item>
-            {isLoggedIn? (
+            {isLoggedIn ? 
                <Button onClick={handleLogout}>Logout</Button>
-            ):(
+            :
               <Button onClick={() => handlePageChange('login')}>Login</Button>
-            )}
+            }
             <>
-              <Button onClick={() => handlePageChange('home')}>Home</Button>
-              <Button onClick={() => handlePageChange('about')}>About</Button>
+            {isLoggedIn  && 
+              <>
+                <Button onClick={() => handlePageChange('home')}>Home</Button>
+                <Button onClick={() => handlePageChange('about')}>About</Button>
+              </>
+            }
+              
             </>
 
           </Grid>

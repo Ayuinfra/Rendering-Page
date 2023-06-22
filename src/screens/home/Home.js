@@ -9,13 +9,13 @@ const Home = (props) => {
 
         <Fragment>
             <Typography variant="body1" align="center">
-                Welcome : {props.userData?.name  }
+                Welcome : {props.userData.name }
             </Typography>
             <Typography>
-                Email   :   {props.userData?.email}
+                Email   :   {props.userData.email}
             </Typography>
             <Typography>
-                gender  :  {props.userData?.gender}
+                gender  :  {props.userData.gender}
             </Typography>
         </Fragment>
     )
