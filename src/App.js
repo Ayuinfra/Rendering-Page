@@ -14,15 +14,15 @@ function App() {
 
     const [users, setUsers] = useState([{
        id:1, 
-        name: "Vijay",
-        surName: "Kumar",
-        email: "vkumar@infrablok.com"
+        name: "Vishal",
+        surName: "Chauhan",
+        email: "vishal@gmail.com"
     },
     {
        id:2,
-        name: "Ajay",
-        surName: "Kumar",
-        email: "akumar@infrablok.com"
+        name: "Prajwal",
+        surName: "Jain",
+        email: "Prajwal@gmail.com"
     }]);
 
     const onAddUserHandler = (user) => {
