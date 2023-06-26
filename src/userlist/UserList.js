@@ -12,7 +12,7 @@ const UserList = (props) => {
 
 
     const onEditUserHandler = (selectedUser)=>{
-        console.log("selected",selectedUser);
+        
         props.onSetSelectedUser(selectedUser);
     };
 
