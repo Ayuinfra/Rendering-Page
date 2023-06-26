@@ -18,10 +18,12 @@ const Data = () => {
   };
 
   const handleLogin = (email, password) => {
-    const user = userInfo.find(item => item.email === email);
+    const trimmedEmail=email.trim();
+    const trimmedPassword=password.trim();
+    const user = userInfo.find(item => item.email === trimmedEmail);
     if(user){
-      if (email===user.email && password === user.password){
-          const loggedInUser = userInfo.find((data)=> data.email === email );
+      if (trimmedEmail === user.email && trimmedPassword === user.password){
+          const loggedInUser = userInfo.find((data)=> data.email=== trimmedEmail );
           setIsLoggedin(true);
           setUserData(loggedInUser);
           setCurrentPage('home');
