@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 
 
 const Edit = (props) => {
 
-
+  
     const navigation = useNavigate();
     const [Name, SetName] = useState(props.user.name);
     const [Surname, SetSurname] = useState(props.user.surName);

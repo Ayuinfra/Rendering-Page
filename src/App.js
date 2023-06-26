@@ -1,52 +1,52 @@
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Fragment,  useState } from 'react';
+import { Fragment, useState } from 'react';
 import AddUser from './adduser/AddUser';
 import Home from './homepage/Home';
 import Edit from './editpage/Edit';
 
- 
+
 function App() {
-   
+
     const navigate = useNavigate();
-    const [selectedUser,setSelectedUser] = useState(null);
-    
+    const [selectedUser, setSelectedUser] = useState(null);
+
 
     const [users, setUsers] = useState([{
-       id:1, 
+        id: 1,
         name: "Vishal",
         surName: "Chauhan",
         email: "vishal@gmail.com"
     },
     {
-       id:2,
+        id: 2,
         name: "Prajwal",
         surName: "Jain",
         email: "Prajwal@gmail.com"
     }]);
 
     const onAddUserHandler = (user) => {
-        setUsers((prev)=>([...prev,user]))
+        setUsers((prev) => ([...prev, user]))
     };
 
-    const onSetSelectedUserHandler = (user)=>{
+    const onSetSelectedUserHandler = (user) => {
         setSelectedUser(user);
         navigate('Edit');
     }
 
-    const onEditHandler=(user) => {
+    const onEditHandler = (user) => {
         const arr = [...users];
-        const index = arr.findIndex(item=>item.id === user.id);
-        if(index > -1){
+        const index = arr.findIndex(item => item.id === user.id);
+        if (index > -1) {
             arr[index] = user;
             setUsers(arr)
         }
-        else{
+        else {
             alert("not exists");
         }
     }
-    const onDeleteHandler=(userId)=>{
-        const arr  = users.filter(user=>user.id !== userId);
+    const onDeleteHandler = (userId) => {
+        const arr = users.filter(user => user.id !== userId);
         setUsers(arr);
     }
 
@@ -55,10 +55,12 @@ function App() {
         <Fragment>
             <Routes>
                 <Route path='AddUser' element={<AddUser addUser={onAddUserHandler} users={users} />} />
-                <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler}/>} />
-                <Route path='UserList' element={<Home onDelete={onDeleteHandler}   users={users} onSetSelectedUser={onSetSelectedUserHandler}/>} />
-                <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/>
-                <Route exact path = '/viewstate' element= {<openProfile/>}/>
+                <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
+                <Route path='UserList' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
+                {/* <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/> */}
+                <Route path='Edit' element={<Edit edit={onEditHandler} />} />
+
+                <Route exact path='/viewstate' element={<openProfile />} />
             </Routes>
 
         </Fragment>
