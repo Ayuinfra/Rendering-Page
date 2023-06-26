@@ -62,8 +62,8 @@ function App() {
                 <Route path='AddUser' element={<AddUser addUser={onAddUserHandler} users={users} />} />
                 <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
                 <Route path='UserList' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
-                {/* <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/> */}
-                <Route path='Edit' element={<Edit edit={onEditHandler} />} />
+                <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/>
+                {/* <Route path='Edit' element={<Edit edit={onEditHandler} />} /> */}
             </Routes>
 
         </Fragment>
