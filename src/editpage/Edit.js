@@ -6,7 +6,7 @@ import { Button, Container, TextField } from "@mui/material";
 const Edit = (props) => {
 
     const location = useLocation();
-    console.log(location);
+    
     const userObj=location.state.userObj;
 
     const navigation = useNavigate();
