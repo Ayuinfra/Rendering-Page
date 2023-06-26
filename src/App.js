@@ -5,12 +5,12 @@ import AddUser from './adduser/AddUser';
 import Home from './homepage/Home';
 import Edit from './editpage/Edit';
 
+ 
 function App() {
    
     const navigate = useNavigate();
     const [selectedUser,setSelectedUser] = useState(null);
     
-   
 
     const [users, setUsers] = useState([{
        id:1, 
@@ -58,7 +58,9 @@ function App() {
                 <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler}/>} />
                 <Route path='UserList' element={<Home onDelete={onDeleteHandler}   users={users} onSetSelectedUser={onSetSelectedUserHandler}/>} />
                 <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/>
+                <Route exact path = '/viewstate' element= {<openProfile/>}/>
             </Routes>
+
         </Fragment>
     )
 
