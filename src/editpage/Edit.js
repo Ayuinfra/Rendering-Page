@@ -1,15 +1,18 @@
-import {  useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 
 
 const Edit = (props) => {
 
-  
+    const location = useLocation();
+    console.log(location);
+    const userObj=location.state.userObj;
+
     const navigation = useNavigate();
-    const [Name, SetName] = useState(props.user.name);
-    const [Surname, SetSurname] = useState(props.user.surName);
-    const [Email, SetEmail] = useState(props.user.email);
+    const [Name, SetName] = useState(userObj.name);
+    const [Surname, SetSurname] = useState(userObj.surName);
+    const [Email, SetEmail] = useState(userObj.email);
 
 
     const handleNameChanges = (e) => {
@@ -27,7 +30,7 @@ const Edit = (props) => {
             name: Name,
             surName: Surname,
             email: Email,
-            id: props.user.id,
+            id: userObj.id,
         };
         console.log(data);
         props.edit(data);

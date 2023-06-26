@@ -31,7 +31,12 @@ function App() {
 
     const onSetSelectedUserHandler = (user) => {
         setSelectedUser(user);
-        navigate('Edit');
+        navigate('Edit', {
+            state: {
+                userObj: user
+    
+            }
+        } );
     }
 
     const onEditHandler = (user) => {
@@ -42,7 +47,7 @@ function App() {
             setUsers(arr)
         }
         else {
-            alert("not exists");
+             alert("not exists");
         }
     }
     const onDeleteHandler = (userId) => {
@@ -59,8 +64,6 @@ function App() {
                 <Route path='UserList' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
                 {/* <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/> */}
                 <Route path='Edit' element={<Edit edit={onEditHandler} />} />
-
-                <Route exact path='/viewstate' element={<openProfile />} />
             </Routes>
 
         </Fragment>
