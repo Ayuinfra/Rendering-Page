@@ -48,17 +48,17 @@ const AddUser = (props) => {
         else
             setIsEmailInVaild(true)
     }
-    const validatename = (FirstName) => {
+    const validatename = (Name) => {
 
-        const NameRegex =  /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/ ;
-        const res = NameRegex.test(FirstName);
+        const NameRegex =  /^\s*[a-zA-Z]+$/ ;
+        const res = NameRegex.test(Name);
        
         return res;
     }
-    const validateSurname = (LastName) => {
+    const validateSurname = (Surname) => {
 
-        const SurnameRegex =  /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/;
-        const res = SurnameRegex.test(LastName);
+        const SurnameRegex =  /^\s*[a-zA-Z]+$/;
+        const res = SurnameRegex.test(Surname);
        
         return res;
     }
