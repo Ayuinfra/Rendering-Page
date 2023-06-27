@@ -62,9 +62,6 @@ function App() {
 
 
         <Fragment>
-            <Helmet>
-                <title>Learning react</title>
-            </Helmet>
             <Routes>
                 <Route path='AddUser' element={<AddUser addUser={onAddUserHandler} users={users} />} />
                 <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
