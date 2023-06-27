@@ -49,17 +49,17 @@ const Edit = (props) => {
         else
             setIsEmailInVaild(true)
     }
-    const validatefirstname = (Name) => {
+    const validatefirstname = (FirstName) => {
 
         const FirstNameRegex =  /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/ ;
-        const res = FirstNameRegex.test(Name);
+        const res = FirstNameRegex.test(FirstName);
        
         return res;
     }
-    const validatelastname = (Surname) => {
+    const validatelastname = (LastName) => {
 
         const LastNameRegex =  /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/;
-        const res = LastNameRegex.test(Surname);
+        const res = LastNameRegex.test(LastName);
        
         return res;
     }
