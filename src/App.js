@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react';
 import AddUser from './adduser/AddUser';
 import Home from './homepage/Home';
 import Edit from './editpage/Edit';
+import { Helmet } from 'react-helmet';
 
 
 function App() {
@@ -34,9 +35,9 @@ function App() {
         navigate('Edit', {
             state: {
                 userObj: user
-    
+
             }
-        } );
+        });
     }
 
     const onEditHandler = (user) => {
@@ -47,7 +48,7 @@ function App() {
             setUsers(arr)
         }
         else {
-             alert("not exists");
+            alert("not exists");
         }
     }
     const onDeleteHandler = (userId) => {
@@ -57,12 +58,18 @@ function App() {
 
 
     return (
+
+
+
         <Fragment>
+            <Helmet>
+                <title>Learning react</title>
+            </Helmet>
             <Routes>
                 <Route path='AddUser' element={<AddUser addUser={onAddUserHandler} users={users} />} />
                 <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
                 <Route path='UserList' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
-                <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />}/>
+                <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />} />
                 {/* <Route path='Edit' element={<Edit edit={onEditHandler} />} /> */}
             </Routes>
 
