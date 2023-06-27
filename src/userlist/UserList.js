@@ -27,8 +27,8 @@ const UserList = (props) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">SurName</TableCell>
+                            <TableCell align="center">FirstName</TableCell>
+                            <TableCell align="center">LastName</TableCell>
                             <TableCell align="center">Email</TableCell>
                         </TableRow>
                     </TableHead>
@@ -38,8 +38,8 @@ const UserList = (props) => {
                                 key={item.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell align="center">{item.name}</TableCell>
-                                <TableCell align="center">{item.surName}</TableCell>
+                                <TableCell align="center">{item.FirstName}</TableCell>
+                                <TableCell align="center">{item.LastName}</TableCell>
                                 <TableCell align="center">{item.email}</TableCell>
                                 <TableCell align="center"><Button onClick={()=>onEditUserHandler(item)}>Edit</Button></TableCell>
                                 <TableCell align="center"><Button onClick={()=>onDeleteHandler(item)}>Delete</Button></TableCell>

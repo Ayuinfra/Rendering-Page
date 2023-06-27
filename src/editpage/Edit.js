@@ -12,27 +12,35 @@ const Edit = (props) => {
 
     const navigation = useNavigate();
    
-    const [Name, SetName] = useState(userObj.name);
-    const [Surname, SetSurname] = useState(userObj.surName);
+    const [FirstName, SetFirstName] = useState(userObj.FirstName);
+    const [LastName, SetLastName] = useState(userObj.LastName);
     const [Email, SetEmail] = useState(userObj.email);
     const [isEmailInValid,setIsEmailInVaild] = useState(false);
-    const [isNameInvalid,setisNameInvalid] = useState(false);
-    const [isSurnameInvalid,setisSurnameInvalid] = useState(false);
+    const [isFirstNameInvalid,setisFirstNameInvalid] = useState(false);
+    const [isLastNameInvalid,setisLastNameInvalid] = useState(false);
 
     const handleNameChanges = (e) => {
-        SetName(e.target.value);
-        if(validatename(e.target.value))
-            setisNameInvalid(false)
+        SetFirstName(e.target.value);
+        if(e.target.value === ''){
+            setisFirstNameInvalid(false);
+            return;
+        }
+        if(validatefirstname(e.target.value))
+            setisFirstNameInvalid(false)
         else
-            setisNameInvalid(true)
+            setisFirstNameInvalid(true)
     }
 
     const handleSurnameChanges = (e) => {
-        SetSurname(e.target.value);
-        if(validateSurname(e.target.value))
-            setisSurnameInvalid(false)
+        SetLastName(e.target.value);
+        if(e.target.value === ''){
+            setisLastNameInvalid(false);
+            return;
+        }
+        if(validatelastname(e.target.value))
+            setisLastNameInvalid(false)
         else
-        setisSurnameInvalid(true)
+        setisLastNameInvalid(true)
     }
     const handleEmailChanges = (e) => {
         SetEmail(e.target.value);
@@ -41,17 +49,17 @@ const Edit = (props) => {
         else
             setIsEmailInVaild(true)
     }
-    const validatename = (Name) => {
+    const validatefirstname = (Name) => {
 
-        const NameRegex =  /^[a-zA-Z]+$/ ;
-        const res = NameRegex.test(Name);
+        const FirstNameRegex =  /^[a-zA-Z]+$/ ;
+        const res = FirstNameRegex.test(Name);
        
         return res;
     }
-    const validateSurname = (Surname) => {
+    const validatelastname = (Surname) => {
 
-        const SurnameRegex =  /^[a-zA-Z]+$/;
-        const res = SurnameRegex.test(Surname);
+        const LastNameRegex =  /^[a-zA-Z]+$/;
+        const res = LastNameRegex.test(Surname);
        
         return res;
     }
@@ -69,13 +77,13 @@ const Edit = (props) => {
         
         let isFormInValid = false;
 
-        if(Name===''){
-            setisNameInvalid(true);
+        if(FirstName===''){
+            setisFirstNameInvalid(true);
             isFormInValid = true;
         }
 
-        if(Surname===''){
-            setisSurnameInvalid(true);
+        if(LastName===''){
+            setisLastNameInvalid(true);
             isFormInValid = true;
         }
         
@@ -91,8 +99,8 @@ const Edit = (props) => {
 
 
         const data = {
-            name: Name,
-            surName: Surname,
+            FirstName: FirstName,
+            LastName: LastName,
             email: Email,
             id:userObj.id,
         };
@@ -105,11 +113,11 @@ const Edit = (props) => {
             <Container maxWidth="md" sx={{marginTop:'2rem',display:'flexStart'}}>
                         <Button onClick={()=> navigation(-1)}>Go Back</Button>
                 <TextField
-                    label="Name"
-                    value={Name}
+                    label="FirstName"
+                    value={FirstName}
                     onChange={handleNameChanges}
-                    error = {isNameInvalid}
-                    helperText={isNameInvalid ? 'Invalid Name Format' : ''}
+                    error = {isFirstNameInvalid}
+                    helperText={isFirstNameInvalid ? 'Invalid Name Format' : ''}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -117,11 +125,11 @@ const Edit = (props) => {
                 />
                 
                 <TextField
-                    label="Surname"
-                    value={Surname}
+                    label="LastName"
+                    value={LastName}
                     onChange={handleSurnameChanges}
-                    error = {isSurnameInvalid}
-                    helperText={isSurnameInvalid ? 'Invalid Surname Format' : ''}
+                    error = {isLastNameInvalid}
+                    helperText={isLastNameInvalid ? 'Invalid Surname Format' : ''}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -145,7 +153,7 @@ const Edit = (props) => {
                         varient="contained" 
                         color="primary"
                         onClick={handleSubmit}
-                        disabled={isEmailInValid || isNameInvalid || isSurnameInvalid}
+                        disabled={isEmailInValid || isFirstNameInvalid || isLastNameInvalid}
                         
                         >
                             

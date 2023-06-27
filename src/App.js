@@ -15,14 +15,14 @@ function App() {
 
     const [users, setUsers] = useState([{
         id: 1,
-        name: "Vishal",
-        surName: "Chauhan",
+        FirstName: "Vishal",
+        LastName: "Chauhan",
         email: "vishal@gmail.com"
     },
     {
         id: 2,
-        name: "Prajwal",
-        surName: "Jain",
+        FirstName: "Prajwal",
+        LastName: "Jain",
         email: "Prajwal@gmail.com"
     }]);
 

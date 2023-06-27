@@ -7,30 +7,42 @@ const AddUser = (props) => {
 
     const navigation = useNavigate();
   
-    const [Name, SetName] = useState('');
-    const [Surname, SetSurname] = useState('');
+    const [FirstName, SetFirstName] = useState('');
+    const [LastName, SetLastName] = useState('');
     const [Email, SetEmail] = useState('');
     const [isEmailInValid,setIsEmailInVaild] = useState(false);
-    const [isNameInvalid,setisNameInvalid] = useState(false);
-    const [isSurnameInvalid,setisSurnameInvalid] = useState(false);
+    const [isFirstNameInvalid,setisFirstNameInvalid] = useState(false);
+    const [isLastNameInvalid,setisLastNameInvalid] = useState(false);
 
     const handleNameChanges = (e) => {
-        SetName(e.target.value);
+        SetFirstName(e.target.value);
+        if(e.target.value === ''){
+            setisFirstNameInvalid(false);
+            return;
+        }
         if(validatename(e.target.value))
-            setisNameInvalid(false)
+        setisFirstNameInvalid(false)
         else
-            setisNameInvalid(true)
+        setisFirstNameInvalid(true)
     }
 
     const handleSurnameChanges = (e) => {
-        SetSurname(e.target.value);
+        SetLastName(e.target.value);
+        if(e.target.value === ''){
+            setisLastNameInvalid(false);
+            return;
+        }
         if(validateSurname(e.target.value))
-            setisSurnameInvalid(false)
+        setisLastNameInvalid(false)
         else
-        setisSurnameInvalid(true)
+        setisLastNameInvalid(true)
     }
     const handleEmailChanges = (e) => {
         SetEmail(e.target.value);
+        if(e.target.value === ''){
+            setIsEmailInVaild(false);
+            return;
+        }
         if(validatemail(e.target.value))
             setIsEmailInVaild(false)
         else
@@ -64,13 +76,13 @@ const AddUser = (props) => {
 
         let isFormInValid = false;
 
-        if(Name===''){
-            setisNameInvalid(true);
+        if(FirstName===''){
+            setisFirstNameInvalid(true);
             isFormInValid = true;
         }
 
-        if(Surname===''){
-            setisSurnameInvalid(true);
+        if(LastName===''){
+            setisLastNameInvalid(true);
             isFormInValid = true;
         }
         
@@ -86,8 +98,8 @@ const AddUser = (props) => {
 
         const id= props.users.length+1
         const data = {
-            name: Name,
-            surName: Surname,
+            FirstName: FirstName,
+            LastName: LastName,
             email: Email,
             id:id,
         };
@@ -101,10 +113,10 @@ const AddUser = (props) => {
             <Fragment>
                 <TextField
                     label="Name"
-                    value={Name}
+                    value={FirstName}
                     onChange={handleNameChanges}
-                    error = {isNameInvalid}
-                    helperText={isNameInvalid &&  'Invalid Name Format'}
+                    error = {isFirstNameInvalid}
+                    helperText={isFirstNameInvalid &&  'Invalid Name Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -112,11 +124,11 @@ const AddUser = (props) => {
                 />
                 
                 <TextField
-                    label="Surname"
-                    value={Surname}
+                    label="LastName"
+                    value={LastName}
                     onChange={handleSurnameChanges}
-                    error = {isSurnameInvalid}
-                    helperText={isSurnameInvalid  && 'Invalid Surname Format'}
+                    error = {isLastNameInvalid}
+                    helperText={isLastNameInvalid  && 'Invalid Surname Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -140,7 +152,7 @@ const AddUser = (props) => {
                         varient="contained" 
                         color="primary"
                         onClick={handleSubmit}
-                        disabled={isEmailInValid || isNameInvalid || isSurnameInvalid}
+                        disabled={isEmailInValid || isFirstNameInvalid || isLastNameInvalid}
                         
                         >
                             
