@@ -104,7 +104,7 @@ const AddUser = (props) => {
                     value={Name}
                     onChange={handleNameChanges}
                     error = {isNameInvalid}
-                    helperText={isNameInvalid ? 'Invalid Name Format' : ''}
+                    helperText={isNameInvalid &&  'Invalid Name Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -116,7 +116,7 @@ const AddUser = (props) => {
                     value={Surname}
                     onChange={handleSurnameChanges}
                     error = {isSurnameInvalid}
-                    helperText={isSurnameInvalid ? 'Invalid Surname Format' : ''}
+                    helperText={isSurnameInvalid  && 'Invalid Surname Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -128,7 +128,7 @@ const AddUser = (props) => {
                     value={Email}
                     onChange={handleEmailChanges}
                     error = {isEmailInValid}
-                    helperText={isEmailInValid ? 'Invalid Email Format' : ''}
+                    helperText={isEmailInValid &&  'Invalid Email Format' }
                     fullWidth
                     sx={{
                         marginTop : '20px'
