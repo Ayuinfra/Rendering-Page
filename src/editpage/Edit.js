@@ -5,16 +5,16 @@ import { Button, Container, TextField } from "@mui/material";
 
 const Edit = (props) => {
 
+  
     const location = useLocation();
+    
+    const userObj=location.state.userObj;
 
-    const userObj = location.state.userObj;
-
-    const navigation = useNavigate()
-	
+    const navigation = useNavigate();
     const [Name, SetName] = useState(userObj.name);
     const [Surname, SetSurname] = useState(userObj.surName);
     const [Email, SetEmail] = useState(userObj.email);
-  const [isEmailInValid,setIsEmailInVaild] = useState(false);
+    const [isEmailInValid,setIsEmailInVaild] = useState(false);
     const [isNameInvalid,setisNameInvalid] = useState(false);
     const [isSurnameInvalid,setisSurnameInvalid] = useState(false);
 
@@ -62,7 +62,7 @@ const Edit = (props) => {
         return res;
 
     }
-    
+
     const handleSubmit = () => 
     {
         
@@ -88,20 +88,21 @@ const Edit = (props) => {
             return;
         }
 
-        const id= props.user.length+1
+
         const data = {
             name: Name,
             surName: Surname,
             email: Email,
-            id:id,
+            id:userObj.id,
         };
-        props.Edit(data);
-        navigation('/UserList')
+       
+        props.edit(data);
+        navigation('../UserList')
     };
     return (
       
             <Container maxWidth="md" sx={{marginTop:'2rem',display:'flexStart'}}>
-         
+           
                 <TextField
                     label="Name"
                     value={Name}
@@ -146,12 +147,11 @@ const Edit = (props) => {
                         disabled={isEmailInValid || isNameInvalid || isSurnameInvalid}
                         
                         >
-                    Submit
+                            
+                    Update
                 </Button>
                 </Container>
-
-   
-
+       
     )
 }
 
