@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const AddUser = (props) => {
 
     const navigation = useNavigate();
+  
     const [Name, SetName] = useState('');
     const [Surname, SetSurname] = useState('');
     const [Email, SetEmail] = useState('');
@@ -60,7 +61,7 @@ const AddUser = (props) => {
 
     const handleSubmit = () => 
     {
-        
+
         let isFormInValid = false;
 
         if(Name===''){
@@ -94,8 +95,9 @@ const AddUser = (props) => {
         navigation('/UserList')
     };
     return (
-      
+
             <Container maxWidth="md" sx={{marginTop:'2rem',display:'flexStart'}}>
+                <Button onClick={()=> navigation(-1)}>Go Back</Button>
             <Fragment>
                 <TextField
                     label="Name"
@@ -144,6 +146,7 @@ const AddUser = (props) => {
                             
                     Submit
                 </Button>
+                
                 </Fragment>
             </Container>
 

@@ -11,6 +11,7 @@ const Edit = (props) => {
     const userObj=location.state.userObj;
 
     const navigation = useNavigate();
+   
     const [Name, SetName] = useState(userObj.name);
     const [Surname, SetSurname] = useState(userObj.surName);
     const [Email, SetEmail] = useState(userObj.email);
@@ -102,7 +103,7 @@ const Edit = (props) => {
     return (
       
             <Container maxWidth="md" sx={{marginTop:'2rem',display:'flexStart'}}>
-           
+                        <Button onClick={()=> navigation(-1)}>Go Back</Button>
                 <TextField
                     label="Name"
                     value={Name}
