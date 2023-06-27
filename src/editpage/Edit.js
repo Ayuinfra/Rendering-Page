@@ -13,7 +13,7 @@ const Edit = (props) => {
     const [Name, SetName] = useState(userObj.name);
     const [Surname, SetSurname] = useState(userObj.surName);
     const [Email, SetEmail] = useState(userObj.email);
-
+    const [validemail,SetValidEmail] = useState(userObj.Email);
 
     const handleNameChanges = (e) => {
         SetName(e.target.value);
@@ -23,9 +23,17 @@ const Edit = (props) => {
         SetSurname(e.target.value);
     }
     const handleEmailChanges = (e) => {
-        SetEmail(e.target.value);
-    }
-    const handleSubmit = () => {
+         SetEmail(e.target.value);
+        SetValidEmail(validatemail(e.target.value))
+}
+const validatemail = (Email) => {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(Email);
+
+}
+
+    const handleUpdate = () => {
         const data = {
             name: Name,
             surName: Surname,
@@ -53,16 +61,25 @@ const Edit = (props) => {
                 onChange={handleSurnameChanges}
                 fullWidth
             />
-            <TextField
-                label="Email"
-                value={Email}
-                onChange={handleEmailChanges}
-                fullWidth
-            />
-            <Button varient="contained" onClick={handleSubmit}>
-                Update
-            </Button>
-        </Container>
+             <TextField
+                    label="Email"
+                    value={Email}
+                    onChange={handleEmailChanges}
+                    error = {!validemail}
+                    helperText={!validemail ? 'Invalid Email Format' : ''}
+                    fullWidth
+                />
+                
+                <Button 
+                        varient="contained" 
+                        color="primary"
+                        onClick={handleUpdate}
+                        disabled={!validemail}
+                        >
+                    Submit
+                </Button>
+               
+            </Container>
     )
 }
 

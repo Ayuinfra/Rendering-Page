@@ -9,7 +9,10 @@ const AddUser = (props) => {
     const [Name, SetName] = useState('');
     const [Surname, SetSurname] = useState('');
     const [Email, SetEmail] = useState('');
-        
+    const [validemail,SetValidEmail] = useState('');
+
+
+    
 
     const handleNameChanges = (e) => {
         SetName(e.target.value);
@@ -20,6 +23,14 @@ const AddUser = (props) => {
     }
     const handleEmailChanges = (e) => {
         SetEmail(e.target.value);
+        SetValidEmail(validatemail(e.target.value))
+    }
+    const validatemail = (Email) => {
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(Email);
+
+
     }
     const handleSubmit = () => 
     {
@@ -54,9 +65,17 @@ const AddUser = (props) => {
                     label="Email"
                     value={Email}
                     onChange={handleEmailChanges}
+                    error = {!validemail}
+                    helperText={!validemail ? 'Invalid Email Format' : ''}
                     fullWidth
                 />
-                <Button varient="contained" onClick={handleSubmit}>
+                
+                <Button 
+                        varient="contained" 
+                        color="primary"
+                        onClick={handleSubmit}
+                        disabled={!validemail}
+                        >
                     Submit
                 </Button>
                 </Fragment>
