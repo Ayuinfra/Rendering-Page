@@ -50,7 +50,7 @@ const AddUser = (props) => {
     }
     const validatename = (Name) => {
 
-        const NameRegex =  /^[a-zA-Z ]*$/ ;
+        const NameRegex =  /^[a-zA-Z]*$/ ;
         const res = NameRegex.test(Name);
        
         return res;
@@ -58,7 +58,7 @@ const AddUser = (props) => {
 
     const validateSurname = (Surname) => {
 
-        const SurnameRegex =  /^[a-zA-Z ]*$/;
+        const SurnameRegex =  /^[a-zA-Z]*$/;
         const res = SurnameRegex.test(Surname);
        
         return res;
@@ -117,7 +117,7 @@ const AddUser = (props) => {
                     value={FirstName}
                     onChange={handleNameChanges}
                     error = {isFirstNameInvalid}
-                    helperText={isFirstNameInvalid &&  'Invalid Name Format'}
+                    helperText={isFirstNameInvalid &&  'Invalid Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -129,7 +129,7 @@ const AddUser = (props) => {
                     value={LastName}
                     onChange={handleSurnameChanges}
                     error = {isLastNameInvalid}
-                    helperText={isLastNameInvalid  && 'Invalid Surname Format'}
+                    helperText={isLastNameInvalid  && 'Invalid Format'}
                     fullWidth
                     sx={{
                         marginTop : '20px'
@@ -141,7 +141,7 @@ const AddUser = (props) => {
                     value={Email}
                     onChange={handleEmailChanges}
                     error = {isEmailInValid}
-                    helperText={isEmailInValid &&  'Invalid Email Format' }
+                    helperText={isEmailInValid &&  'Invalid Format' }
                     fullWidth
                     sx={{
                         marginTop : '20px'

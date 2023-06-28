@@ -60,14 +60,14 @@ const Edit = (props) => {
 
     const validatefirstname = (FirstName) => {
 
-        const FirstNameRegex = /^[a-zA-Z ]*$/;
+        const FirstNameRegex = /^[a-zA-Z]*$/;
         const res = FirstNameRegex.test(FirstName);
 
         return res;
     }
     const validatelastname = (LastName) => {
 
-        const LastNameRegex = /^[a-zA-Z ]*$/;
+        const LastNameRegex = /^[a-zA-Z]*$/;
         const res = LastNameRegex.test(LastName);
 
         return res;
@@ -127,7 +127,7 @@ const Edit = (props) => {
                 onChange={handleNameChanges}
                 error={isFirstNameInvalid}
                 
-                helperText={isFirstNameInvalid ? 'Invalid Name Format' : ''}
+                helperText={isFirstNameInvalid ? 'Invalid Format' : ''}
                 fullWidth
                 sx={{
                     marginTop: '20px'
@@ -139,7 +139,7 @@ const Edit = (props) => {
                 value={LastName}
                 onChange={handleSurnameChanges}
                 error={isLastNameInvalid}
-                helperText={isLastNameInvalid ? 'Invalid Surname Format' : ''}
+                helperText={isLastNameInvalid ? 'Invalid Format' : ''}
                 fullWidth
                 sx={{
                     marginTop: '20px'
@@ -151,7 +151,7 @@ const Edit = (props) => {
                 value={Email}
                 onChange={handleEmailChanges}
                 error={isEmailInValid}
-                helperText={isEmailInValid ? 'Invalid Email Format' : ''}
+                helperText={isEmailInValid ? 'Invalid Format' : ''}
                 fullWidth
                 sx={{
                     marginTop: '20px'
