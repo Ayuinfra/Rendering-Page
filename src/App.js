@@ -30,6 +30,7 @@ function App() {
 
     const onAddUserHandler = (user) => {
         setUsers((prev) => ([...prev, user]))
+        setCurrentPage('Home');
     };
 
     const onSetSelectedUserHandler = (user) => {
