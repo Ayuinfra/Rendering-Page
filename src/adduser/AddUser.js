@@ -39,7 +39,7 @@ const AddUser = (props) => {
         setisLastNameInvalid(true)
     }
     const handleEmailChanges = (e) => {
-        SetEmail(e.target.value).trim();
+        SetEmail(e.target.value.trim());
         if(e.target.value === ''){
             setIsEmailInVaild(false);
             return;
