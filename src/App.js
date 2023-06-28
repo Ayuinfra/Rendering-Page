@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react';
 import AddUser from './adduser/AddUser';
 import Home from './homepage/Home';
 import Edit from './editpage/Edit';
+import UserList from './userlist/UserList';
 
 
 
@@ -11,6 +12,7 @@ function App() {
 
     const navigate = useNavigate();
     const [selectedUser, setSelectedUser] = useState(null);
+    const [currentPage,setCurrentPage] = useState("Home")
 
 
     const [users, setUsers] = useState([{
@@ -55,7 +57,25 @@ function App() {
         const arr = users.filter(user => user.id !== userId);
         setUsers(arr);
     }
-
+    const renderPage = () => {
+        switch (currentPage) {
+          case 'AddUser':
+            return (
+              <AddUser
+              onAddUserHandler={onAddUserHandler}
+              />
+            );
+          case 'home':
+            return <Home  />;
+          case 'Edit':
+            return < Edit />;
+        case ' UserList':
+            return <UserList />;
+    
+          default:
+            return null;
+        }
+    }
 
     return (
 
