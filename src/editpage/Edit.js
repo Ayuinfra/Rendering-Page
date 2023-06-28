@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 
 
@@ -21,13 +21,11 @@ const Edit = (props) => {
     const [hasChanged,SetHasChanged] = useState(false);
     const formRef = useRef(null);
 
-    useEffect(() => {
-        SetHasChanged(FirstName !== '' || LastName !== '' || Email !== '');
-    }, [FirstName,LastName,Email])
-     
+   
 
     const handleNameChanges = (e) => {
         SetFirstName(e.target.value);
+        SetHasChanged(true)
         if (e.target.value === '') {
             setisFirstNameInvalid(false);
             return;
@@ -40,6 +38,7 @@ const Edit = (props) => {
 
     const handleSurnameChanges = (e) => {
         SetLastName(e.target.value);
+        SetHasChanged(true)
         if (e.target.value === '') {
             setisLastNameInvalid(false);
             return;
@@ -50,6 +49,7 @@ const Edit = (props) => {
             setisLastNameInvalid(true)
     }
     const handleEmailChanges = (e) => {
+        SetHasChanged(true)
         SetEmail(e.target.value);
         if (validatemail(e.target.value))
             setIsEmailInVaild(false)
@@ -57,20 +57,7 @@ const Edit = (props) => {
             setIsEmailInVaild(true)
 
     }
-       const handleClickOutside = (e) =>{
-        if(formRef.current && !formRef.current.contains(e.target)){
-            SetHasChanged(false);
 
-        }
-       }
-
-       useEffect(() => {
-        document.addEventListener('mousedown',handleClickOutside)
-        return() =>{
-            document.removeEventListener('mousedown',handleClickOutside)
-        };
-       }, []);
-           
     const validatefirstname = (FirstName) => {
 
         const FirstNameRegex = /^[a-zA-Z ]*$/;
@@ -176,7 +163,7 @@ const Edit = (props) => {
                 varient="contained"
                 color="primary"
                 onClick={handleSubmit}
-                disabled={isEmailInValid || isFirstNameInvalid || isLastNameInvalid || hasChanged}
+                disabled={isEmailInValid || isFirstNameInvalid || isLastNameInvalid || !hasChanged}
 
             >
 
