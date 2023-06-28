@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 
 
@@ -19,7 +19,7 @@ const Edit = (props) => {
     const [isFirstNameInvalid, setisFirstNameInvalid] = useState(false);
     const [isLastNameInvalid, setisLastNameInvalid] = useState(false);
     const [hasChanged,SetHasChanged] = useState(false);
-    const formRef = useRef(null);
+    
 
    
 
@@ -126,7 +126,7 @@ const Edit = (props) => {
                 value={FirstName}
                 onChange={handleNameChanges}
                 error={isFirstNameInvalid}
-                inputRef={formRef}
+                
                 helperText={isFirstNameInvalid ? 'Invalid Name Format' : ''}
                 fullWidth
                 sx={{
