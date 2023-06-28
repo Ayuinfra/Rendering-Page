@@ -51,14 +51,14 @@ const Edit = (props) => {
     }
     const validatefirstname = (FirstName) => {
 
-        const FirstNameRegex =  /^\s*[a-zA-Z]+$/ ;
+        const FirstNameRegex =  /^[a-zA-Z ]*$/ ;
         const res = FirstNameRegex.test(FirstName);
        
         return res;
     }
     const validatelastname = (LastName) => {
 
-        const LastNameRegex =  /^\s*[a-zA-Z]+$/;
+        const LastNameRegex =  /^[a-zA-Z ]*$/;
         const res = LastNameRegex.test(LastName);
        
         return res;
