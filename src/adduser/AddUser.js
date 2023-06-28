@@ -55,6 +55,7 @@ const AddUser = (props) => {
        
         return res;
     }
+
     const validateSurname = (Surname) => {
 
         const SurnameRegex =  /^[a-zA-Z ]*$/;
