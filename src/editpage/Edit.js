@@ -24,7 +24,7 @@ const Edit = (props) => {
    
 
     const handleNameChanges = (e) => {
-        SetFirstName(e.target.value);
+        SetFirstName(e.target.value.trim())
         SetHasChanged(true)
         if (e.target.value === '') {
             setisFirstNameInvalid(false);
@@ -37,7 +37,7 @@ const Edit = (props) => {
     }
 
     const handleSurnameChanges = (e) => {
-        SetLastName(e.target.value);
+        SetLastName(e.target.value.trim());
         SetHasChanged(true)
         if (e.target.value === '') {
             setisLastNameInvalid(false);
@@ -50,7 +50,7 @@ const Edit = (props) => {
     }
     const handleEmailChanges = (e) => {
         SetHasChanged(true)
-        SetEmail(e.target.value);
+        SetEmail(e.target.value.trim());
         if (validatemail(e.target.value))
             setIsEmailInVaild(false)
         else
@@ -60,14 +60,14 @@ const Edit = (props) => {
 
     const validatefirstname = (FirstName) => {
 
-        const FirstNameRegex = /^[a-zA-Z]*$/;
+        const FirstNameRegex = /^[a-zA-Z ]*$/;
         const res = FirstNameRegex.test(FirstName);
 
         return res;
     }
     const validatelastname = (LastName) => {
 
-        const LastNameRegex = /^[a-zA-Z]*$/;
+        const LastNameRegex = /^[a-zA-Z ]*$/;
         const res = LastNameRegex.test(LastName);
 
         return res;

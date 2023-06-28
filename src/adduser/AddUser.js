@@ -15,30 +15,31 @@ const AddUser = (props) => {
     const [isLastNameInvalid,setisLastNameInvalid] = useState(false);
 
     const handleNameChanges = (e) => {
-        SetFirstName(e.target.value);
+        
+        SetFirstName(e.target.value.trim());
         if(e.target.value === ''){
             setisFirstNameInvalid(false);
             return;
         }
         if(validatename(e.target.value))
-        setisFirstNameInvalid(false)
+            setisFirstNameInvalid(false)
         else
-        setisFirstNameInvalid(true)
+            setisFirstNameInvalid(true)
     }
 
     const handleSurnameChanges = (e) => {
-        SetLastName(e.target.value);
+        SetLastName(e.target.value.trim());
         if(e.target.value === ''){
             setisLastNameInvalid(false);
             return;
         }
         if(validateSurname(e.target.value))
-        setisLastNameInvalid(false)
+            setisLastNameInvalid(false)
         else
         setisLastNameInvalid(true)
     }
     const handleEmailChanges = (e) => {
-        SetEmail(e.target.value);
+        SetEmail(e.target.value).trim();
         if(e.target.value === ''){
             setIsEmailInVaild(false);
             return;
@@ -50,7 +51,7 @@ const AddUser = (props) => {
     }
     const validatename = (Name) => {
 
-        const NameRegex =  /^[a-zA-Z]*$/ ;
+        const NameRegex =  /^[a-zA-Z ]*$/ ;
         const res = NameRegex.test(Name);
        
         return res;
@@ -58,7 +59,7 @@ const AddUser = (props) => {
 
     const validateSurname = (Surname) => {
 
-        const SurnameRegex =  /^[a-zA-Z]*$/;
+        const SurnameRegex =  /^[a-zA-Z ]*$/;
         const res = SurnameRegex.test(Surname);
        
         return res;
