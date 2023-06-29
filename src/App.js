@@ -1,106 +1,76 @@
-import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Fragment, useState } from 'react';
-import AddUser from './adduser/AddUser';
-import Home from './homepage/Home';
-import Edit from './editpage/Edit';
-import UserList from './userlist/UserList';
+import React, { Fragment, useState } from 'react';
+import HomePage from './homepage/Home';
+import AddUserPage from './adduser/AddUser';
+import EditUserPage from './editpage/Edit';
 
+const App = () => {
+  const [users, setUsers] = useState([
+    { id: 1, firstName: 'Vishal', lastName: 'Chauhan', email: 'vishu@gmail.com' },
+    { id: 2, firstName: 'Prajwal', lastName: 'Smith', email: 'prajwal@gmail.com' },
+  ]);
+  const [currentPage, setCurrentPage] = useState('home');
+  const [editingUser, setEditingUser] = useState(null);
 
+  const handleAddUser = () => {
+    setCurrentPage('addUser');
+  };
 
-function App() {
+  const handleEditUser = (userId) => {
+    const user = users.find((u) => u.id === userId);
+    setEditingUser(user);
+    setCurrentPage('editUser');
+  };
 
-    const navigate = useNavigate();
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [currentPage,setCurrentPage] = useState("Home")
+  const handleDeleteUser = (userId) => {
+    const updatedUsers = users.filter((u) => u.id !== userId);
+    setUsers(updatedUsers);
+  };
 
+  const handleAddUserSubmit = (newUser) => {
+    const updatedUsers = [...users, { id: Date.now(), ...newUser }];
+    setUsers(updatedUsers);
+    setCurrentPage('home');
+  };
 
-    const [users, setUsers] = useState([{
-        id: 1,
-        FirstName: "Vishal",
-        LastName: "Chauhan",
-        email: "vishal@gmail.com"
-    },
-    {
-        id: 2,
-        FirstName: "Prajwal",
-        LastName: "Jain",
-        email: "Prajwal@gmail.com"
-    }]);
+  const handleUpdateUser = (userId, updatedUser) => {
+    const updatedUsers = users.map((user) => {
+      if (user.id === userId) {
+        return { ...user, ...updatedUser };
+      }
+      return user;
+    });
+    setUsers(updatedUsers);
+    setCurrentPage('home');
+    setEditingUser(null);
+  };
 
-    const onAddUserHandler = (user) => {
-        setUsers((prev) => ([...prev, user]))
-        setCurrentPage('Home');
-    };
+  const handleGoBack = () => {
+    setCurrentPage('home');
+    setEditingUser(null);
+  };
 
-    const onSetSelectedUserHandler = (user) => {
-        setSelectedUser(user);
-        navigate('Edit', {
-            state: {
-                userObj: user
+  return (
+    <Fragment>
+      {currentPage === 'home' && (
+        <HomePage
+          users={users}
+          handleAddUser={handleAddUser}
+          handleEditUser={handleEditUser}
+          handleDeleteUser={handleDeleteUser}
+        />
+      )}
+      {currentPage === 'addUser' && (
+        <AddUserPage handleAddUserSubmit={handleAddUserSubmit} handleGoBack={handleGoBack} />
+      )}
+      {currentPage === 'editUser' && (
+        <EditUserPage
+          user={editingUser}
+          handleUpdateUser={handleUpdateUser}
+          handleGoBack={handleGoBack}
+        />
+      )}
+    </Fragment>
+  );
+};
 
-            }
-        });
-    }
-
-    const onEditHandler = (user) => {
-        const arr = [...users];
-        const index = arr.findIndex(item => item.id === user.id);
-        if (index > -1) {
-            arr[index] = user;
-            setUsers(arr)
-        }
-        else {
-            alert("not exists");
-        }
-    }
-    const onDeleteHandler = (userId) => {
-        const arr = users.filter(user => user.id !== userId);
-        setUsers(arr);
-    }
-    const renderPage = () => {
-        switch (currentPage) {
-          case 'AddUser':
-            return (
-              <AddUser
-              onAddUserHandler={onAddUserHandler}
-              />
-            );
-          case 'home':
-            return <Home  />;
-          case 'Edit':
-            return < Edit />;
-        case ' UserList':
-            return <UserList />;
-    
-          default:
-            return null;
-        }
-    }
-
-    return (
-
-
-
-        <Fragment>
-            <Routes>
-                <Route path='AddUser' element={<AddUser addUser={onAddUserHandler} users={users} />} />
-                <Route path='' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
-                <Route path='UserList' element={<Home onDelete={onDeleteHandler} users={users} onSetSelectedUser={onSetSelectedUserHandler} />} />
-                <Route path='Edit' element={<Edit edit={onEditHandler} user={selectedUser} />} />
-                {/* <Route path='Edit' element={<Edit edit={onEditHandler} />} /> */}
-            </Routes>
-
-        </Fragment>
-    )
-
-}
 export default App;
-
-
-
-
-
-
-
-

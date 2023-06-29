@@ -1,26 +1,50 @@
-import { Fragment } from "react";
-import UserList from "../userlist/UserList";
-import { Button, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { Fragment } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button, IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
+const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
+  return (
+    <Fragment>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>First Name</TableCell>
+            <TableCell>Last Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell>{user.firstName}</TableCell>
+              <TableCell>{user.lastName}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>
+                <IconButton onClick={() => handleEditUser(user.id)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton onClick={() => handleDeleteUser(user.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+        onClick={handleAddUser}
+        style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}
+      >
+        Add User
+      </Button>
+    </Fragment>
+  );
+};
 
-const Home = (props) => {
-
-    const navigate = useNavigate();
-
-    return (
-        <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
-            <Fragment>
-                
-                <UserList
-                    users={props.users}
-                    onSetSelectedUser={props.onSetSelectedUser}
-                    onDelete={props.onDelete}
-                />
-                <Button onClick={() => navigate('/AddUser')}>Add User</Button>
-             </Fragment>
-        </Container>
-
-    )
-}
-export default Home;
+export default HomePage
