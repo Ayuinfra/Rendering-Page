@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow, Button, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
   return (
-    <Fragment>
+    <>
       <Table>
         <TableHead>
           <TableRow>
@@ -43,8 +43,8 @@ const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) =>
       >
         Add User
       </Button>
-    </Fragment>
+    </>
   );
 };
 
-export default HomePage
+export default HomePage;

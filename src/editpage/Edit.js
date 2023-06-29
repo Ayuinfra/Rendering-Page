@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
+import { Container, TextField, Button } from '@mui/material';
 
 const EditUserPage = ({ user, handleUpdateUser, handleGoBack }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -6,13 +7,16 @@ const EditUserPage = ({ user, handleUpdateUser, handleGoBack }) => {
   const [email, setEmail] = useState(user.email);
   const [isFormDirty, setIsFormDirty] = useState(false);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleUpdateUser(user.id, { firstName, lastName, email });
+  const handleUpdate = () => {
+    if (isFormDirty && firstName && lastName && email) {
+      handleUpdateUser(user.id, { firstName, lastName, email });
+      setIsFormDirty(false);
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     if (user[name] !== value) {
       setIsFormDirty(true);
     } else {
@@ -35,29 +39,41 @@ const EditUserPage = ({ user, handleUpdateUser, handleGoBack }) => {
   };
 
   return (
-    <Fragment>
+    <Container>
       <h2>Edit User</h2>
-      <form onSubmit={handleFormSubmit}>
-        <label>
-          First Name:
-          <input type="text" name="firstName" value={firstName} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input type="text" name="lastName" value={lastName} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" name="email" value={email} onChange={handleInputChange} />
-        </label>
-        <br />
-        <button type="submit" disabled={!isFormDirty}>Update</button>
-        <button type="button" onClick={handleGoBack}>Back</button>
-      </form>
-    </Fragment>
+      <TextField
+        label="First Name"
+        name="firstName"
+        value={firstName}
+        onChange={handleInputChange}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="Last Name"
+        name="lastName"
+        value={lastName}
+        onChange={handleInputChange}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="Email"
+        name="email"
+        value={email}
+        onChange={handleInputChange}
+        fullWidth
+        margin="normal"
+      />
+      <Button variant="contained" color="primary" onClick={handleUpdate} disabled={!isFormDirty}>
+        Update
+      </Button>
+      <Button variant="contained" onClick={handleGoBack}>Back</Button>
+    </Container>
   );
 };
 
 export default EditUserPage;
+
+
+

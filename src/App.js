@@ -1,12 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import HomePage from './homepage/Home';
 import AddUserPage from './adduser/AddUser';
 import EditUserPage from './editpage/Edit';
 
 const App = () => {
   const [users, setUsers] = useState([
-    { id: 1, firstName: 'Vishal', lastName: 'Chauhan', email: 'vishu@gmail.com' },
-    { id: 2, firstName: 'Prajwal', lastName: 'Smith', email: 'prajwal@gmail.com' },
+    { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' },
+    { id: 2, firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com' },
   ]);
   const [currentPage, setCurrentPage] = useState('home');
   const [editingUser, setEditingUser] = useState(null);
@@ -50,7 +50,7 @@ const App = () => {
   };
 
   return (
-    <Fragment>
+    <>
       {currentPage === 'home' && (
         <HomePage
           users={users}
@@ -69,7 +69,7 @@ const App = () => {
           handleGoBack={handleGoBack}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

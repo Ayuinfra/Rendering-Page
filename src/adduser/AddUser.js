@@ -1,38 +1,47 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
+import { Container, TextField, Button } from '@mui/material';
 
 const AddUserPage = ({ handleAddUserSubmit, handleGoBack }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleAddUserSubmit({ firstName, lastName, email });
+  const handleAddUser = () => {
+    if (firstName && lastName && email) {
+      handleAddUserSubmit({ firstName, lastName, email });
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+    }
   };
 
   return (
-    <Fragment>
+    <Container>
       <h2>Add User</h2>
-      <form onSubmit={handleFormSubmit}>
-        <label>
-          First Name:
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleGoBack}>Back</button>
-      </form>
-    </Fragment>
+      <TextField
+        label="First Name"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="Last Name"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <Button variant="contained" color="primary" onClick={handleAddUser}>Submit</Button>
+      <Button variant="contained" onClick={handleGoBack}>Back</Button>
+    </Container>
   );
 };
 
