@@ -39,7 +39,7 @@ const EditUserPage = ({ user, handleUpdateUser, handleGoBack }) => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
       <h2>Edit User</h2>
       <TextField
         label="First Name"

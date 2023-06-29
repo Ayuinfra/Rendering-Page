@@ -16,7 +16,7 @@ const AddUserPage = ({ handleAddUserSubmit, handleGoBack }) => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
       <h2>Add User</h2>
       <TextField
         label="First Name"
