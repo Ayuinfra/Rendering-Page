@@ -3,10 +3,12 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Button, IconButton } 
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Container } from '@mui/system';
 
 const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
   return (
-    <>
+    <Container >
+       <>
       <Table>
         <TableHead>
           <TableRow>
@@ -39,11 +41,13 @@ const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) =>
         color="primary"
         startIcon={<AddIcon />}
         onClick={handleAddUser}
-        style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}
+        style={{ position: 'fixed', bottom: '100px', left: '50%', transform: 'translateX(-50%)' }}
       >
         Add User
       </Button>
     </>
+    </Container>
+   
   );
 };
 
