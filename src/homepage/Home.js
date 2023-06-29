@@ -7,7 +7,7 @@ import { Container } from '@mui/system';
 
 const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
   return (
-    <Container >
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
        <>
       <Table>
         <TableHead>
