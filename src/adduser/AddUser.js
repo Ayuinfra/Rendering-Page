@@ -15,6 +15,8 @@ const AddUserPage = ({ handleAddUserSubmit, handleGoBack }) => {
     }
   };
 
+  const isSubmitDisabled = !firstName || !lastName || !email ;
+
   return (
     <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
       <h2>Add User</h2>
@@ -39,7 +41,7 @@ const AddUserPage = ({ handleAddUserSubmit, handleGoBack }) => {
         fullWidth
         margin="normal"
       />
-      <Button variant="contained" color="primary" onClick={handleAddUser}>Submit</Button>
+      <Button variant="contained" color="primary" disabled= {isSubmitDisabled} onClick={handleAddUser}>Submit</Button>
       <Button variant="contained" onClick={handleGoBack}>Back</Button>
     </Container>
   );

@@ -5,8 +5,8 @@ import EditUserPage from './editpage/Edit';
 
 const App = () => {
   const [users, setUsers] = useState([
-    { id: 1, firstName: 'Vishal', lastName: 'Chauhan', email: 'vishu@gmail.com' },
-    { id: 2, firstName: 'Prajwal', lastName: 'Jain', email: 'pari@gmail.com' },
+    { id: 1, firstName: 'Prajwal', lastName: 'Jain', email: 'pari@gmail.com' },
+    { id: 2, firstName: 'Vishal', lastName: 'Chauhan', email: 'vishu@gmail.com' },
   ]);
   const [currentPage, setCurrentPage] = useState('home');
   const [editingUser, setEditingUser] = useState(null);
