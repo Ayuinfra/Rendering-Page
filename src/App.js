@@ -27,7 +27,7 @@ const App = () => {
   };
 
   const handleAddUserSubmit = (newUser) => {
-    const updatedUsers = [...users, { id: Date.now(), ...newUser }];
+    const updatedUsers = [...users, { id: users.length+1, ...newUser }];
     setUsers(updatedUsers);
     setCurrentPage('home');
   };
