@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import AddUserPage from '../adduser/AddUser';
 import EditUserPage from '../editpage/Edit';
 
@@ -41,10 +41,10 @@ const HomePage = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) =>
   const handleSort = (column) => {
     if (column === sortColumn) {
 
-      userList.sort((a, b) => b[column].localeCompare(a[column]));
+      userList.sort((a, b) => b[column].localCompare(a[column]));
       setSortColumn(null);
     } else {
-      userList.sort((a, b) => a[column].localeCompare(b[column]));
+      userList.sort((a, b) => a[column].localCompare(b[column]));
       setSortColumn(column);
     }
   };
