@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomePage from './homepage/Home';
 import AddUserPage from './adduser/AddUser';
 import EditUserPage from './editpage/Edit';
@@ -15,6 +15,7 @@ const App = () => {
     setCurrentPage('addUser');
   };
 
+  
   const handleEditUser = (userId) => {
     const user = users.find((u) => u.id === userId);
     setEditingUser(user);
@@ -27,9 +28,10 @@ const App = () => {
   };
 
   const handleAddUserSubmit = (newUser) => {
-    const updatedUsers = [...users, { id: users.length+1, ...newUser }];
+    const updatedUsers = [...users, { id: users.length + 1, ...newUser }];
     setUsers(updatedUsers);
     setCurrentPage('home');
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
   };
 
   const handleUpdateUser = (userId, updatedUser) => {
@@ -48,6 +50,12 @@ const App = () => {
     setCurrentPage('home');
     setEditingUser(null);
   };
+
+  useEffect(() => {
+    const response = localStorage.getItem('users');
+    console.log("res", response)
+    setUsers(JSON.parse(response))
+  }, [])
 
   return (
     <>
