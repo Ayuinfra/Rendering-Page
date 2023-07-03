@@ -1,57 +1,107 @@
 import { Button } from '@mui/base';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 
 
-const Home = () => {
-  const [users, setUsers] = useState([]);
+const Home = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
+  const [deleteUserId, setDeleteUserId] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.log('Error fetching data:', error);
-    }
+  const handleDeleteConfirmation = (userId) => {
+    setDeleteUserId(userId);
   };
 
-  
+  const handleDeleteCancel = () => {
+    setDeleteUserId(null);
+  };
+
+  const handleDeleteConfirm = () => {
+    handleDeleteUser(deleteUserId);
+    setDeleteUserId(null);
+  };
+
+  const sortedUsers = users.slice().sort((a, b) => {
+    const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+    const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
 
   return (
-    <Container maxWidth = "md" sx={{marginTop:'2rem',display:'flexstart'}}>
-<TableContainer component={Paper}>
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}  >
+      <>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell><b>First Name</b></TableCell>
-            <TableCell><b>Last Name</b></TableCell>
-            <TableCell><b>Actions</b></TableCell>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+                <b>First Name</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+              <b>Last Name</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+              <b>Email</b>
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddCircleOutline />}
+                onClick={handleAddUser}
+              >
+                Add User
+              </Button>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.title}</TableCell>
-              <TableCell>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
-              <TableCell>
-                <Button variant="outlined" color="primary">
-                  Edit
-                </Button>
-                <Button variant="outlined" color="secondary">
-                  Delete
-                </Button>
+          {sortedUsers.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={4} align="center">
+                <Typography>No records found</Typography>
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            sortedUsers.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.firstName}</TableCell>
+                <TableCell>{user.lastName}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => handleEditUser(user.id)}>
+                    <Edit />
+                  </IconButton>
+                  <IconButton onClick={() => handleDeleteConfirmation(user.id)}>
+                    <Delete />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
-    </TableContainer>
+
+      <Dialog open={deleteUserId !== null} onClose={handleDeleteCancel}>
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="primary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
     </Container>
     
   );
