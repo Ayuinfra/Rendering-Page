@@ -14,13 +14,13 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-      const data = await response.json();
+      const data = response.json();
       setUsers(data);
     } catch (error) {
       console.log('Error fetching data:', error);
     }
   };
-
+  
 
   return (
     <Container maxWidth = "md" sx={{marginTop:'2rem',display:'flexstart'}}>
@@ -29,8 +29,8 @@ const Home = () => {
         <TableHead>
           <TableRow>
             <TableCell><b>First Name</b></TableCell>
-            <TableCell><b>First Name</b></TableCell>
-            <TableCell><b>First Name</b></TableCell>
+            <TableCell><b>Task</b></TableCell>
+            <TableCell><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
