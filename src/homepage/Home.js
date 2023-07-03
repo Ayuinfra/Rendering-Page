@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const [note, setNote] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -16,7 +16,7 @@ const Home = () => {
       const response = await fetch('https://jsonplaceholder.typicode.com/todos');
       const data = await response.json();
       console.log(data);
-      setUsers(data);
+      setNote(data);
     } catch (error) {
       console.log('Error fetching data:', error);
     }
@@ -35,7 +35,7 @@ const Home = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {note.map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.title}</TableCell>
               <TableCell>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
