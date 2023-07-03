@@ -1,50 +1,65 @@
-import React, { useState } from 'react';
-import { Container, TextField, Button } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
+import { useState } from "react";
 
-const AddUserPage = ({ handleAddUserSubmit, handleGoBack }) => {
+const AddUser = ({ handleAddUser, handleGoHome }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleAddUser = () => {
-    if (firstName && lastName && email) {
-      handleAddUserSubmit({ firstName, lastName, email });
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-    }
+  const handleFormSubmit = () => {
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+    };
+    handleAddUser(newUser);
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    handleGoHome();
   };
 
-  const isSubmitDisabled = !firstName || !lastName || !email;
-
   return (
-    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
-      <h2>Add User</h2>
-      <TextField
-        label="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <Button variant="contained" color="primary" disabled={isSubmitDisabled} onClick={handleAddUser}>Submit</Button>
-      <Button variant="contained" onClick={handleGoBack}>Back</Button>
-    </Container>
+    <Dialog open={true} onClose={handleGoHome}>
+      <DialogTitle>Add User</DialogTitle>
+      <DialogContent>
+        <TextField
+          label="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          margin="normal"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleGoHome} variant="outlined" color="secondary">
+          Cancel
+        </Button>
+        <Button
+          onClick={handleFormSubmit}
+          variant="contained"
+          color="primary"
+          disabled={!firstName || !lastName || !email}
+        >
+          Submit
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default AddUserPage;
+export default AddUser;

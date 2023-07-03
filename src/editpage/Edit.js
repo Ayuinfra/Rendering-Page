@@ -1,79 +1,72 @@
-import React, { useState } from 'react';
-import { Container, TextField, Button } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
 
-const EditUserPage = ({ user, handleUpdateUser, handleGoBack }) => {
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [isFormDirty, setIsFormDirty] = useState(false);
 
-  const handleUpdate = () => {
-    if (isFormDirty && firstName && lastName && email) {
-      handleUpdateUser(user.id, { firstName, lastName, email });
-      setIsFormDirty(false);
+const EditUser = ({ user, handleUpdateUser, handleGoHome }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
     }
-  };
+  }, [user]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    if (user[name] !== value) {
-      setIsFormDirty(true);
-    } else {
-      setIsFormDirty(false);
-    }
-
-    switch (name) {
-      case 'firstName':
-        setFirstName(value);
-        break;
-      case 'lastName':
-        setLastName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      default:
-        break;
-    }
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const updatedUser = {
+      id: user.id,
+      firstName,
+      lastName,
+      email,
+    };
+    handleUpdateUser(updatedUser);
   };
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}>
-      <h2>Edit User</h2>
-      <TextField
-        label="First Name"
-        name="firstName"
-        value={firstName}
-        onChange={handleInputChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Last Name"
-        name="lastName"
-        value={lastName}
-        onChange={handleInputChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Email"
-        name="email"
-        value={email}
-        onChange={handleInputChange}
-        fullWidth
-        margin="normal"
-      />
-      <Button variant="contained" color="primary" onClick={handleUpdate} disabled={!isFormDirty}>
-        Update
-      </Button>
-      <Button variant="contained" onClick={handleGoBack}>Back</Button>
-    </Container>
+    <Dialog open={true} onClose={handleGoHome}>
+      <DialogTitle>Edit User</DialogTitle>
+      <DialogContent>
+        <form onSubmit={handleFormSubmit}>
+          <TextField
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <DialogActions>
+            <Button onClick={handleGoHome}>Back</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={!firstName || !lastName || !email}
+            >
+              Update
+            </Button>
+          </DialogActions>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default EditUserPage;
-
-
-
+export default EditUser;
