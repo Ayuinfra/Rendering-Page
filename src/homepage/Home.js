@@ -4,7 +4,7 @@ import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 
 
-const Home = () => {
+const Home = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
   const [note, setNote] = useState([]);
 
   useEffect(() => {
