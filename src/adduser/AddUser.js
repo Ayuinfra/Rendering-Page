@@ -1,12 +1,32 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
-import { useState } from "react";
+import { Button } from '@mui/base';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import React, { useState } from 'react';
+
 
 const AddUser = ({ handleAddUser, handleGoHome }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const handleFormSubmit = () => {
+    if (!validateName(firstName)) {
+      setFirstNameError(true);
+      return;
+    }
+
+    if (!validateName(lastName)) {
+      setLastNameError(true);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError(true);
+      return;
+    }
+
     const newUser = {
       firstName,
       lastName,
@@ -16,7 +36,22 @@ const AddUser = ({ handleAddUser, handleGoHome }) => {
     setFirstName('');
     setLastName('');
     setEmail('');
+    setFirstNameError(false);
+    setLastNameError(false);
+    setEmailError(false);
     handleGoHome();
+  };
+
+  const validateName = (name) => {
+    
+    const namePattern = /^[a-zA-Z ]*$/;
+    return namePattern.test(name);
+  };
+
+  const validateEmail = (email) => {
+    
+    const emailPattern = /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/;
+    return emailPattern.test(email);
   };
 
   return (
@@ -29,6 +64,8 @@ const AddUser = ({ handleAddUser, handleGoHome }) => {
           onChange={(e) => setFirstName(e.target.value)}
           fullWidth
           margin="normal"
+          error={firstNameError}
+          helperText={firstNameError && 'Invalid first name'}
         />
         <TextField
           label="Last Name"
@@ -36,6 +73,8 @@ const AddUser = ({ handleAddUser, handleGoHome }) => {
           onChange={(e) => setLastName(e.target.value)}
           fullWidth
           margin="normal"
+          error={lastNameError}
+          helperText={lastNameError && 'Invalid last name'}
         />
         <TextField
           label="Email"
@@ -43,6 +82,8 @@ const AddUser = ({ handleAddUser, handleGoHome }) => {
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
           margin="normal"
+          error={emailError}
+          helperText={emailError && 'Invalid email'}
         />
       </DialogContent>
       <DialogActions>

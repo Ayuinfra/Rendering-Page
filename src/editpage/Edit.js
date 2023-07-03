@@ -1,22 +1,32 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
+import { Button } from '@mui/base';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import React, { useState } from 'react';
 
 
 const EditUser = ({ user, handleUpdateUser, handleGoHome }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [email, setEmail] = useState(user.email);
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setEmail(user.email);
+  const handleFormSubmit = () => {
+    if (!validateName(firstName)) {
+      setFirstNameError(true);
+      return;
     }
-  }, [user]);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+    if (!validateName(lastName)) {
+      setLastNameError(true);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError(true);
+      return;
+    }
+
     const updatedUser = {
       id: user.id,
       firstName,
@@ -24,47 +34,72 @@ const EditUser = ({ user, handleUpdateUser, handleGoHome }) => {
       email,
     };
     handleUpdateUser(updatedUser);
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setFirstNameError(false);
+    setLastNameError(false);
+    setEmailError(false);
+    handleGoHome();
+  };
+
+  const validateName = (name) => {
+    
+    const namePattern = /^[a-zA-Z ]*$/;;
+    return namePattern.test(name);
+  };
+
+  const validateEmail = (email) => {
+    
+    const emailPattern = /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/;
+    return emailPattern.test(email);
   };
 
   return (
     <Dialog open={true} onClose={handleGoHome}>
       <DialogTitle>Edit User</DialogTitle>
       <DialogContent>
-        <form onSubmit={handleFormSubmit}>
-          <TextField
-            label="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <DialogActions>
-            <Button onClick={handleGoHome}>Back</Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={!firstName || !lastName || !email}
-            >
-              Update
-            </Button>
-          </DialogActions>
-        </form>
+        <TextField
+          label="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          fullWidth
+          margin="normal"
+          error={firstNameError}
+          helperText={firstNameError && 'Invalid first name'}
+        />
+        <TextField
+          label="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          fullWidth
+          margin="normal"
+          error={lastNameError}
+          helperText={lastNameError && 'Invalid last name'}
+        />
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          margin="normal"
+          error={emailError}
+          helperText={emailError && 'Invalid email'}
+        />
       </DialogContent>
+      <DialogActions>
+        <Button onClick={handleGoHome} variant="outlined" color="secondary">
+          Cancel
+        </Button>
+        <Button
+          onClick={handleFormSubmit}
+          variant="contained"
+          color="primary"
+          disabled={!firstName || !lastName || !email}
+        >
+          Update
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };
