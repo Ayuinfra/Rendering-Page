@@ -21,15 +21,17 @@ const Home = () => {
     }
   };
 
+  
+
   return (
     <Container maxWidth = "md" sx={{marginTop:'2rem',display:'flexstart'}}>
 <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell>Email</TableCell>
+            <TableCell><b>First Name</b></TableCell>
+            <TableCell><b>Last Name</b></TableCell>
+            <TableCell><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
