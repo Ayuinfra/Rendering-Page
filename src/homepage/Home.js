@@ -27,8 +27,8 @@ const Home = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell><b>Name</b></TableCell>
             <TableCell><b>Task</b></TableCell>
+            <TableCell><b>Status</b></TableCell>
             <TableCell><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
