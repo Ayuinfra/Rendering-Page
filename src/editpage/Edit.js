@@ -51,6 +51,7 @@ const EditUser = ({ user, handleUpdateUser, handleGoHome }) => {
 
   const validateEmail = (email) => {
     
+    // eslint-disable-next-line no-useless-escape
     const emailPattern = /^\s*[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z\d\-]+)*\s*$/;
     return emailPattern.test(email);
   };
