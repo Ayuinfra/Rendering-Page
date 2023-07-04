@@ -2,7 +2,7 @@ import { Button } from '@mui/base';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 
 const Home = () => {
   const [note, setNote] = useState([]);
@@ -13,12 +13,10 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-      const data = await response.json();
-      console.log(data);
-      setNote(data);
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      setNote(response.data);
     } catch (error) {
-      console.log('Error fetching data:', error);
+     
     }
   };
   
