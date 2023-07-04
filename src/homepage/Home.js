@@ -33,10 +33,10 @@ const Home = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {note.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.title}</TableCell>
-              <TableCell>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
+          {note.map((users) => (
+            <TableRow key={users.id}>
+              <TableCell>{users.title}</TableCell>
+              <TableCell>{users.completed ? 'Completed' : 'Incomplete'}</TableCell>
               <TableCell>
                 <Button variant="outlined" color="primary">
                   Edit
