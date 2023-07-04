@@ -13,11 +13,14 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
+      // get the data from the api
       const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+      // convert the data to json
       const data = await response.json();
       console.log(data);
       setNote(data);
     } catch (error) {
+      // make sure to catch any error
       console.log('Error fetching data:', error);
     }
   };
