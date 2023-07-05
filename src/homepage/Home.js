@@ -40,7 +40,7 @@ const Home = () => {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <TextField
         label="Search"
         variant="outlined"
