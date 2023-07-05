@@ -79,7 +79,7 @@ const Home = () => {
         count={totalPages}
         page={page}
         onChange={handlePageChange}
-        sx={{ marginTop: '1rem' , marginBottom:'2'}}
+        sx={{ marginTop: '1rem' , marginBottom:'2rem'}}
       />
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
         {paginatedNote.map((user) => (
