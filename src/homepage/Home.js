@@ -3,7 +3,7 @@ import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Clear } from '@mui/icons-material';
-import {  Search } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
 import Pagination from '@mui/material/Pagination';
 
 const Home = () => {
