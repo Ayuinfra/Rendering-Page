@@ -17,7 +17,7 @@ const Home = () => {
       const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
       setNote(response.data);
     } catch (error) {
-     
+      // Handle error
     }
   };
 
@@ -29,19 +29,22 @@ const Home = () => {
     }
   };
 
+  // Sort the data in alphabetical order based on task title
+  const sortedNote = [...note].sort((a, b) => a.title.localeCompare(b.title));
+
   return (
     <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flexstart', marginBottom: '3rem' }}>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow style={{ backgroundColor: 'CadetBlue' }}>
-              <TableCell style={{ color: 'Black' }}><b>Task</b></TableCell>
-              <TableCell style={{ color: 'Black' }}><b>Status</b></TableCell>
-              <TableCell style={{ color: 'Black' }}><b>Actions</b></TableCell>
+              <TableCell style={{ color: 'black' }}><b>Task</b></TableCell>
+              <TableCell style={{ color: 'black' }}><b>Status</b></TableCell>
+              <TableCell style={{ color: 'black' }}><b>Actions</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {note.map((user) => (
+            {sortedNote.map((user) => (
               <TableRow key={user.id} style={{ backgroundColor: getRowColor(user.completed) }}>
                 <TableCell style={{ color: 'white' }}>{user.title}</TableCell>
                 <TableCell style={{ color: 'white' }}>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
