@@ -3,7 +3,7 @@ import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Edit } from '@mui/icons-material';
-import { Delete } from '@mui/icons-material';
+import { Delete, Search } from '@mui/icons-material';
 
 const Home = () => {
   const [note, setNote] = useState([]);
@@ -24,7 +24,7 @@ const Home = () => {
 
   const getRowColor = (completed) => {
     if (completed) {
-      return 'YellowGreen';
+      return 'green';
     } else {
       return 'orange';
     }
@@ -34,28 +34,33 @@ const Home = () => {
     setSearchTerm(event.target.value);
   };
 
-  // Filter and sort the data based on the search term and title
+  // Filter and sort the data based on the search term and task title
   const filteredAndSortedNote = note
-    .filter((user) =>
-      user.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.body.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    .filter((user) => user.title.toLowerCase().includes(searchTerm.toLowerCase()))
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flexstart', marginBottom: '3rem' }}>
+    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <TextField
         label="Search"
         variant="outlined"
         value={searchTerm}
         onChange={handleSearch}
-        sx={{ marginBottom: '1rem' }}
+        InputProps={{
+          endAdornment: (
+            <IconButton size="small" edge="end" aria-label="search">
+              <Search />
+            </IconButton>
+          ),
+          sx: { borderRadius: '50px' },
+        }}
+        sx={{ marginBottom: '1rem', width: '300px' }}
       />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow style={{ backgroundColor: 'CadetBlue' }}>
-              <TableCell style={{ color: 'Black' }}><b>Title</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Task</b></TableCell>
               <TableCell style={{ color: 'Black' }}><b>Body</b></TableCell>
               <TableCell style={{ color: 'Black' }}><b>Status</b></TableCell>
               <TableCell style={{ color: 'Black' }}><b>Actions</b></TableCell>
