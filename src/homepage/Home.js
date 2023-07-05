@@ -17,7 +17,7 @@ const Home = () => {
       const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
       setNote(response.data);
     } catch (error) {
-      // Handle error
+      
     }
   };
 
@@ -29,7 +29,7 @@ const Home = () => {
     }
   };
 
-  // Sort the data in alphabetical order based on task title
+  
   const sortedNote = [...note].sort((a, b) => a.title.localeCompare(b.title));
 
   return (
