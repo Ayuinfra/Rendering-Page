@@ -1,9 +1,9 @@
-import { IconButton, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { IconButton, Paper, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Edit } from '@mui/icons-material';
-import { Delete, Search, Clear } from '@mui/icons-material';
+import { Clear  } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
 
 const Home = () => {
   const [note, setNote] = useState([]);
@@ -15,18 +15,10 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      const response = await axios.get('https://jsonplaceholder.typicode.com/photos')
       setNote(response.data);
     } catch (error) {
       // Handle error
-    }
-  };
-
-  const getRowColor = (completed) => {
-    if (completed) {
-      return 'YellowGreen';
-    } else {
-      return 'orange';
     }
   };
 
@@ -44,7 +36,7 @@ const Home = () => {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' , marginBottom:'3rem' }}>
+    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' , marginBottom: '3rem'}}>
       <TextField
         label="Search"
         variant="outlined"
@@ -52,56 +44,27 @@ const Home = () => {
         onChange={handleSearch}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
-              <IconButton size="small" edge="start" aria-label="search">
-                <Search />
-              </IconButton>
-            </InputAdornment>
+            <IconButton size="small" edge="start" aria-label="search">
+              <Search />
+            </IconButton>
           ),
           endAdornment: (
-            <InputAdornment position="end">
-              {searchTerm && (
-                <IconButton size="small" edge="end" aria-label="clear" onClick={clearSearch}>
-                  <Clear />
-                </IconButton>
-              )}
-            </InputAdornment>
+            <IconButton size="small" edge="end" aria-label="clear" onClick={clearSearch}>
+              <Clear />
+            </IconButton>
           ),
           sx: { borderRadius: '50px' },
         }}
         sx={{ marginBottom: '1rem', width: '300px' }}
       />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow style={{ backgroundColor: 'Cadetblue' }}>
-              <TableCell style={{ color: 'Black' }}><b>Task</b></TableCell>
-              <TableCell style={{ color: 'Black' }}><b>Body</b></TableCell>
-              <TableCell style={{ color: 'Black' }}><b>Status</b></TableCell>
-              <TableCell style={{ color: 'Black' }}><b>Actions</b></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredAndSortedNote.map((user) => (
-              <TableRow key={user.id} style={{ backgroundColor: getRowColor(user.completed) }}>
-                <TableCell style={{ color: 'white' }}>{user.title}</TableCell>
-                <TableCell style={{ color: 'white' }}>{user.body}</TableCell>
-                <TableCell style={{ color: 'white' }}>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
-                <TableCell>
-                  {!user.completed && (
-                    <IconButton variant="outlined" color="primary">
-                      <Edit />
-                    </IconButton>
-                  )}
-                  <IconButton variant="outlined" color="secondary">
-                    <Delete />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+        {filteredAndSortedNote.map((user) => (
+          <Paper key={user.id} sx={{ padding: '1rem', textAlign: 'center' }}>
+            <img src={user.thumbnailUrl} alt={user.title} style={{ width: '100%', cursor: 'pointer' }} onClick={() => window.open(user.url, '_blank')} />
+            <p>{user.title}</p>
+          </Paper>
+        ))}
+      </Container>
     </Container>
   );
 };
