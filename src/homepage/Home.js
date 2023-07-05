@@ -1,5 +1,5 @@
 import { Button } from '@mui/base';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -23,7 +23,7 @@ const Home = () => {
   
 
   return (
-    <Container maxWidth = "md" sx={{marginTop:'2rem',display:'flexstart'}}>
+    <Container maxWidth = "md" sx={{marginTop:'2rem',display:'flexstart',marginBottom:'3rem'}}>
 <TableContainer component={Paper}>
       <Table>
         <TableHead>
@@ -39,12 +39,12 @@ const Home = () => {
               <TableCell>{users.title}</TableCell>
               <TableCell>{users.completed ? 'Completed' : 'Incomplete'}</TableCell>
               <TableCell>
-                <Button variant="outlined" color="primary">
+                <IconButton variant="outlined" color="primary">
                   Edit
-                </Button>
-                <Button variant="outlined" color="secondary">
+                </IconButton>
+                <IconButton variant="outlined" color="secondary">
                   Delete
-                </Button>
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}
