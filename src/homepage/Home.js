@@ -17,7 +17,7 @@ const Home = () => {
       const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
       setNote(response.data);
     } catch (error) {
-      
+     
     }
   };
 
@@ -34,10 +34,10 @@ const Home = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell><b>Task</b></TableCell>
-              <TableCell><b>Status</b></TableCell>
-              <TableCell><b>Actions</b></TableCell>
+            <TableRow style={{ backgroundColor: 'CadetBlue' }}>
+              <TableCell style={{ color: 'Black' }}><b>Task</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Status</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Actions</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
