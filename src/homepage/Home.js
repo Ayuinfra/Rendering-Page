@@ -55,7 +55,6 @@ const Home = () => {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' , marginBottom:'2rem'}}>
-      
       <TextField
         label="Search"
         variant="outlined"
@@ -76,6 +75,12 @@ const Home = () => {
         }}
         sx={{ marginBottom: '1rem', width: '300px' }}
       />
+      <Pagination
+        count={totalPages}
+        page={page}
+        onChange={handlePageChange}
+        sx={{ marginTop: '1rem' , marginBottom:'2'}}
+      />
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
         {paginatedNote.map((user) => (
           <Paper
@@ -95,12 +100,6 @@ const Home = () => {
           </Paper>
         ))}
       </Container>
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        sx={{ marginTop: '1rem' }}
-      />
     </Container>
   );
 };
