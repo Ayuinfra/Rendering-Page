@@ -24,7 +24,7 @@ const Home = () => {
 
   const getRowColor = (completed) => {
     if (completed) {
-      return 'green';
+      return 'YellowGreen';
     } else {
       return 'orange';
     }
@@ -34,10 +34,13 @@ const Home = () => {
     setSearchTerm(event.target.value);
   };
 
-  // Filter the data based on the search term
-  const filteredNote = note.filter((user) =>
-    user.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter and sort the data based on the search term and title
+  const filteredAndSortedNote = note
+    .filter((user) =>
+      user.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.body.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flexstart', marginBottom: '3rem' }}>
@@ -51,16 +54,18 @@ const Home = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow style={{ backgroundColor: 'blue' }}>
-              <TableCell style={{ color: 'white' }}><b>Task</b></TableCell>
-              <TableCell style={{ color: 'white' }}><b>Status</b></TableCell>
-              <TableCell style={{ color: 'white' }}><b>Actions</b></TableCell>
+            <TableRow style={{ backgroundColor: 'CadetBlue' }}>
+              <TableCell style={{ color: 'Black' }}><b>Title</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Body</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Status</b></TableCell>
+              <TableCell style={{ color: 'Black' }}><b>Actions</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredNote.map((user) => (
+            {filteredAndSortedNote.map((user) => (
               <TableRow key={user.id} style={{ backgroundColor: getRowColor(user.completed) }}>
                 <TableCell style={{ color: 'white' }}>{user.title}</TableCell>
+                <TableCell style={{ color: 'white' }}>{user.body}</TableCell>
                 <TableCell style={{ color: 'white' }}>{user.completed ? 'Completed' : 'Incomplete'}</TableCell>
                 <TableCell>
                   {!user.completed && (
