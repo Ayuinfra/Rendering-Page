@@ -37,7 +37,7 @@ const Home = () => {
     setPage(1); // Reset the page number when the search term is cleared
   };
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = (value) => {
     setPage(value);
   };
 
