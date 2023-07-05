@@ -3,6 +3,8 @@ import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Edit } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 
 const Home = () => {
   const [note, setNote] = useState([]);
@@ -40,10 +42,10 @@ const Home = () => {
               <TableCell>{users.completed ? 'Completed' : 'Incomplete'}</TableCell>
               <TableCell>
                 <IconButton variant="outlined" color="primary">
-                  Edit
+                <Edit />
                 </IconButton>
                 <IconButton variant="outlined" color="secondary">
-                  Delete
+                  <Delete />
                 </IconButton>
               </TableCell>
             </TableRow>
