@@ -93,7 +93,12 @@ const Home = () => {
             <img
               src={user.thumbnailUrl}
               alt={user.title}
-              style={{ width: '100%', cursor: 'pointer' }}
+              style={{
+                width: '100%',
+                aspectRatio: '1/1',
+                objectFit: 'cover',
+                cursor: 'pointer',
+              }}
               onClick={() => window.location.href = user.url}
             />
             <p>{user.title}</p>
