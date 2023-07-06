@@ -110,8 +110,10 @@ const Home = () => {
         sx={{ marginTop: '1rem' }}
       />
       {openImage && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.7)', zIndex: 100 }}>
-          <IconButton
+        
+       <>
+       
+        <IconButton
             size="small"
             edge="end"
             aria-label="close"
@@ -123,9 +125,10 @@ const Home = () => {
           <img
             src={openImage}
             alt="Full Size"
-            style={{ maxWidth: '80%', maxHeight: '80%', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-          />
-        </div>
+            style={{ maxWidth: '80%', maxHeight: '80%', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}/>
+       </>  
+      
+      
       )}
     </Container>
   );
