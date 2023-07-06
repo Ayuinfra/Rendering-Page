@@ -54,7 +54,7 @@ const Home = () => {
   const paginatedNote = filteredAndSortedNote.slice(startIndex, endIndex);
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' , marginBottom:'2rem'}}>
+    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem' }}>
       <TextField
         label="Search"
         variant="outlined"
@@ -79,7 +79,7 @@ const Home = () => {
         count={totalPages}
         page={page}
         onChange={handlePageChange}
-        sx={{ marginTop: '1rem' , marginBottom:'2rem'}}
+        sx={{ marginTop: '1rem', marginBottom: '2rem' }}
       />
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
         {paginatedNote.map((user) => (
@@ -94,7 +94,7 @@ const Home = () => {
               src={user.thumbnailUrl}
               alt={user.title}
               style={{ width: '100%', cursor: 'pointer' }}
-              onClick={() => window.open(user.url, '_blank')}
+              onClick={() => window.location.href = user.url}
             />
             <p>{user.title}</p>
           </Paper>
