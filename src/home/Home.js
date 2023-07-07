@@ -2,8 +2,7 @@ import { IconButton, Typography, Drawer, List, ListItem, ListItemText } from '@m
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
+
 
 
 const projectsList = ["CRUD","IMAGES"];
@@ -46,27 +45,7 @@ const Home = (props) => {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      {isHomeScreen ? (
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={handleDrawerOpen}
-          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
-        >
-          <MenuIcon />
-        </IconButton>
-      ) : (
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="home"
-          onClick={handleHomeClick}
-          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
-        >
-          <HomeIcon />
-        </IconButton>
-      )}
+
       {isHomeScreen ? (
         <Typography variant="h4" component="h1" sx={{ textAlign: 'center', marginTop: '8rem' }}>
           Welcome to the Home Page
@@ -83,7 +62,7 @@ const Home = (props) => {
           </Typography>
         </Container>
       )}
-      <Drawer
+      {/* <Drawer
         anchor="left"
         open={isDrawerOpen}
         onClose={handleDrawerClose}
@@ -98,7 +77,7 @@ const Home = (props) => {
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </Drawer> */}
     </Container>
   );
 };
