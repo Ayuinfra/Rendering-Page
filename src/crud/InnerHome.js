@@ -1,105 +1,107 @@
-import { IconButton, Typography, Drawer, List, ListItem, ListItemText } from '@mui/material';
-import { Container } from '@mui/system';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
+import React, { useState } from 'react';
 
-const Home = () => {
-  const [note, setNote] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isHomeScreen, setIsHomeScreen] = useState(true);
+import { AddCircleOutline, Edit, Delete } from '@mui/icons-material';
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+const Home = ({ users, handleAddUser, handleEditUser, handleDeleteUser }) => {
+  const [deleteUserId, setDeleteUserId] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
-      setNote(response.data);
-    } catch (error) {
-      // Handle error
-    }
+  const handleDeleteConfirmation = (userId) => {
+    setDeleteUserId(userId);
   };
 
-  const handleTitleClick = (image) => {
-    setSelectedImage(image);
-    setIsDrawerOpen(false);
-    setIsHomeScreen(false);
+  const handleDeleteCancel = () => {
+    setDeleteUserId(null);
   };
 
-  const handleDrawerOpen = () => {
-    setIsDrawerOpen(true);
+  const handleDeleteConfirm = () => {
+    handleDeleteUser(deleteUserId);
+    setDeleteUserId(null);
   };
 
-  const handleDrawerClose = () => {
-    setIsDrawerOpen(false);
-  };
-
-  const handleHomeClick = () => {
-    setIsHomeScreen(true);
-    setSelectedImage(null);
-  };
+  const sortedUsers = users.slice().sort((a, b) => {
+    const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+    const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center',marginBottom:'3rem' }}>
-      {isHomeScreen ? (
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={handleDrawerOpen}
-          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
-        >
-          <MenuIcon />
-        </IconButton>
-      ) : (
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="home"
-          onClick={handleHomeClick}
-          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
-        >
-          <HomeIcon />
-        </IconButton>
-      )}
-      {isHomeScreen ? (
-        <Typography variant="h4" component="h1" sx={{ textAlign: 'center', marginTop: '8rem' }}>
-          Welcome to the Home Page
-        </Typography>
-      ) : (
-        <Container sx={{ marginTop: '8rem' }}>
-          <img
-            src={selectedImage.url}
-            alt={selectedImage.title}
-            style={{ width: '100%' }}
-          />
-          <Typography variant="h6" component="h2" sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            {selectedImage.title}
-          </Typography>
-        </Container>
-      )}
-      <Drawer
-        anchor="left"
-        open={isDrawerOpen}
-        onClose={handleDrawerClose}
-      >
-        <List>
-          {note.slice(0, 10).map((user) => (
-            <ListItem
-             
-              key={user.id}
-              onClick={() => handleTitleClick(user)}
-            >
-              <ListItemText primary={user.title} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+    <Container maxWidth="md" sx={{ marginTop: '2rem', display: 'flexStart' }}  >
+      <>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+                <b>First Name</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+              <b>Last Name</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1" fontWeight="bold">
+              <b>Email</b>
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddCircleOutline />}
+                onClick={handleAddUser}
+              >
+                Add User
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedUsers.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={4} align="center">
+                <Typography>No records found</Typography>
+              </TableCell>
+            </TableRow>
+          ) : (
+            sortedUsers.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.firstName}</TableCell>
+                <TableCell>{user.lastName}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => handleEditUser(user.id)}>
+                    <Edit />
+                  </IconButton>
+                  <IconButton onClick={() => handleDeleteConfirmation(user.id)}>
+                    <Delete />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+
+      <Dialog open={deleteUserId !== null} onClose={handleDeleteCancel}>
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="primary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
     </Container>
+    
   );
 };
 
