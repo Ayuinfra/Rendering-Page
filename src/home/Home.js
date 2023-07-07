@@ -1,16 +1,12 @@
-import { IconButton, Typography, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-
-const projectsList = ["CRUD","IMAGES"];
-
 const Home = (props) => {
   const [note, setNote] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isHomeScreen, setIsHomeScreen] = useState(true);
 
   useEffect(() => {
@@ -26,22 +22,6 @@ const Home = (props) => {
     }
   };
 
-  const handleTitleClick = (projectName) => {
-   props.onSetCurrentProject(projectName)
-  };
-
-  const handleDrawerOpen = () => {
-    setIsDrawerOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setIsDrawerOpen(false);
-  };
-
-  const handleHomeClick = () => {
-    setIsHomeScreen(true);
-    setSelectedImage(null);
-  };
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -62,22 +42,7 @@ const Home = (props) => {
           </Typography>
         </Container>
       )}
-      {/* <Drawer
-        anchor="left"
-        open={isDrawerOpen}
-        onClose={handleDrawerClose}
-      >
-        <List>
-          {projectsList.map((item,index) => (
-            <ListItem
-              key={index}
-              onClick={() => handleTitleClick(item)}
-            >
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer> */}
+   
     </Container>
   );
 };
