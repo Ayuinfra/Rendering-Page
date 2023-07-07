@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Home from './homepage/Home';
-import AddUserPage from './adduser/AddUser';
-import EditUserPage from './editpage/Edit';
+import Home from './InnerHome1';
+import AddUser from './AddUser1';
+import EditUser from './Edit1';
 
 const App = () => {
   const [page, setPage] = useState('home');
@@ -58,13 +58,13 @@ const App = () => {
         );
       case 'add':
         return (
-          <AddUserPage handleAddUser={handleAddUser} handleGoHome={handleGoHome} />
+          <AddUser handleAddUser={handleAddUser} handleGoHome={handleGoHome} />
         );
       case 'edit':
         const editUserId = localStorage.getItem('editUserId');
         const userToEdit = users.find((user) => user.id === editUserId);
         return (
-          <EditUserPage
+          <EditUser
             user={userToEdit}
             handleUpdateUser={handleUpdateUser}
             handleGoHome={handleGoHome}

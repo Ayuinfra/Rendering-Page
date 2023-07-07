@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 
 
-const projectsList = ["CRUD","ADD"];
+const projectsList = ["CRUD","IMAGES"];
 
 const Home = (props) => {
   const [note, setNote] = useState([]);
