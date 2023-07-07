@@ -1,17 +1,15 @@
-import { IconButton, Paper, TextField } from '@mui/material';
+import { IconButton, Typography, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Clear } from '@mui/icons-material';
-import { Search } from '@mui/icons-material';
-import Pagination from '@mui/material/Pagination';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Home = () => {
   const [note, setNote] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [page, setPage] = useState(1);
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(note.length / itemsPerPage);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isHomeScreen, setIsHomeScreen] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -26,80 +24,81 @@ const Home = () => {
     }
   };
 
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    setPage(1); // Reset the page number when a new search term is entered
+  const handleTitleClick = (image) => {
+    setSelectedImage(image);
+    setIsDrawerOpen(false);
+    setIsHomeScreen(false);
   };
 
-  const clearSearch = () => {
-    setSearchTerm('');
-    setPage(1); // Reset the page number when the search term is cleared
+  const handleDrawerOpen = () => {
+    setIsDrawerOpen(true);
   };
 
-  const handlePageChange = (event, value) => {
-    setPage(value);
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
   };
 
-  // Filter and sort the data based on the search term and task title
-  const filteredAndSortedNote = note
-    .filter((user) => user.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => a.title.localeCompare(b.title));
-
-  // Calculate the index range of items to display for the current page
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  // Get the current page of items
-  const paginatedNote = filteredAndSortedNote.slice(startIndex, endIndex);
+  const handleHomeClick = () => {
+    setIsHomeScreen(true);
+    setSelectedImage(null);
+  };
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem' }}>
-      <TextField
-        label="Search"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearch}
-        InputProps={{
-          startAdornment: (
-            <IconButton size="small" edge="start" aria-label="search">
-              <Search />
-            </IconButton>
-          ),
-          endAdornment: (
-            <IconButton size="small" edge="end" aria-label="clear" onClick={clearSearch}>
-              <Clear />
-            </IconButton>
-          ),
-          sx: { borderRadius: '50px' },
-        }}
-        sx={{ marginBottom: '1rem', width: '300px' }}
-      />
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        sx={{ marginTop: '1rem', marginBottom: '2rem' }}
-      />
-      <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-        {paginatedNote.map((user) => (
-          <Paper
-            key={user.id}
-            sx={{
-              padding: '1rem',
-              textAlign: 'center',
-            }}
-          >
-            <img
-              src={user.thumbnailUrl}
-              alt={user.title}
-              style={{ width: '100%', cursor: 'pointer' }}
-              onClick={() => window.location.href = user.url}
-            />
-            <p>{user.title}</p>
-          </Paper>
-        ))}
-      </Container>
+    <Container maxWidth="md" sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center',marginBottom:'3rem' }}>
+      {isHomeScreen ? (
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={handleDrawerOpen}
+          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
+        >
+          <MenuIcon />
+        </IconButton>
+      ) : (
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="home"
+          onClick={handleHomeClick}
+          sx={{ position: 'absolute', left: '1rem', top: '1rem' }}
+        >
+          <HomeIcon />
+        </IconButton>
+      )}
+      {isHomeScreen ? (
+        <Typography variant="h4" component="h1" sx={{ textAlign: 'center', marginTop: '8rem' }}>
+          Welcome to the Home Page
+        </Typography>
+      ) : (
+        <Container sx={{ marginTop: '8rem' }}>
+          <img
+            src={selectedImage.url}
+            alt={selectedImage.title}
+            style={{ width: '100%' }}
+          />
+          <Typography variant="h6" component="h2" sx={{ textAlign: 'center', marginTop: '1rem' }}>
+            {selectedImage.title}
+          </Typography>
+        </Container>
+      )}
+      <Drawer
+        anchor="left"
+        open={isDrawerOpen}
+        onClose={handleDrawerClose}
+      >
+        <List>
+          {note.slice(0, 10).map((user) => (
+            <ListItem
+             
+              key={user.id}
+              onClick={() => handleTitleClick(user)}
+            >
+              <ListItemText primary={user.title} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
     </Container>
   );
 };

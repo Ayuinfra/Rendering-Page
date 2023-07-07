@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Home from './homepage/Home';
+import Home from '../src/homepage/Home'
 import AddUserPage from './adduser/AddUser';
 import EditUserPage from './editpage/Edit';
 
@@ -72,12 +72,7 @@ const App = () => {
         );
       default:
         return (
-          <Home
-            users={users}
-            handleAddUser={() => setPage('add')}
-            handleEditUser={handleEditUser}
-            handleDeleteUser={handleDeleteUser}
-          />
+          <Home  />
         );
     }
   };
