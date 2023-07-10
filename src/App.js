@@ -2,8 +2,9 @@ import { Fragment, useCallback, useState } from "react";
 import CrudInnerApp from './crud/InnerApp';
 import Home from "./home/Home";
 import Images from "./images/InnerApp1"
-import { Drawer, IconButton, List, ListItem, ListItemText } from "@mui/material";
+import { Drawer, IconButton, List, ListItem, ListItemText, ListItemIcon } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import CubeCounter from "./cube/InnerApp2";
 
 
@@ -34,6 +35,10 @@ const App = ()=>{
   
 
   const onChangeProjectHandler = (projectName)=>{
+    if (!projectName) {
+      return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
+    }
+
     switch(projectName){
       case "CRUD" :
         return(
@@ -74,6 +79,14 @@ const App = ()=>{
           onClose={handleDrawerClose}
         >
         <List>
+          <ListItem
+            key="home"
+            onClick={() => onSetCurrentProjectHandler(null)}
+          >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+          </ListItem>
           {projectsList.map((item,index) => (
             <ListItem
               key={index}
