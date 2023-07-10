@@ -1,45 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginForm from './login/LoginForm';
 import SignupForm from './signup/SignUpForm';
 import Products from './products/Products';
-import { Button, Container } from '@mui/material';
-import axios from 'axios';
 
 const App = () => {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
 
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('https://fakestoreapi.com/products');
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
-
   const handleLogin = () => {
- 
-    if (email === 'user@example.com' && password === 'password') {
+    const user = users.find((user) => user.email === email && user.password === password);
+    if (user) {
       setIsLoggedIn(true);
+      navigate('/home');
     } else {
       alert('Invalid login credentials');
     }
   };
 
   const handleSignup = () => {
-
-    alert('Signup successful');
+    const newUser = { name, email, password };
+    setUsers([...users, newUser]);
+    setIsLoggedIn(true);
+    navigate('/login');
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    navigate('/login');
   };
 
   const handleEmailChange = (event) => {
@@ -54,64 +48,34 @@ const App = () => {
     setName(event.target.value);
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  const loadLoginPage = (
+      <LoginForm
+        email={email}
+        password={password}
+        handleEmailChange={handleEmailChange}
+        handlePasswordChange={handlePasswordChange}
+        handleLogin={handleLogin}
+      />
+    );
 
-  
+  const loadSignUpPage = (
+      <SignupForm
+        name={name}
+        email={email}
+        password={password}
+        handleNameChange={handleNameChange}
+        handleEmailChange={handleEmailChange}
+        handlePasswordChange={handlePasswordChange}
+        handleSignup={handleSignup}
+      />
+    );
+
   return (
     <Routes>
-      
-        <Route path="/login">
-          {isLoggedIn ? (
-            <Route component={() => <h1>You are already logged in.</h1>} />
-          ) : (
-            <LoginForm
-              email={email}
-              password={password}
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
-              handleLogin={handleLogin}
-            />
-          )}
-        </Route>
-        <Route path="/signup">
-          {isLoggedIn ? (
-            <Route component={() => <h1>You are already signed up and logged in.</h1>} />
-          ) : (
-            <SignupForm
-              name={name}
-              email={email}
-              password={password}
-              handleNameChange={handleNameChange}
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
-              handleSignup={handleSignup}
-            />
-          )}
-        </Route>
-        <Route path="/products">
-          {isLoggedIn ? (
-            <Products products={products} handleLogout={handleLogout} />
-          ) : (
-            <Route component={() => <h1>Please log in to view the products.</h1>} />
-          )}
-        </Route>
-        <Route exact path="/">
-          {isLoggedIn ? (
-            <Route component={() => <h1>Welcome! You are already logged in.</h1>} />
-          ) : (
-            <Container>
-              <Button variant="contained" component={Link} to="/login">
-                Login
-              </Button>
-              <Button variant="contained" component={Link} to="/signup">
-                Signup
-              </Button>
-            </Container>
-          )}
-        </Route>
-      
+      <Route path="/" element={loadSignUpPage} />
+      <Route path="/login" element={loadLoginPage} />
+      <Route path="/home" element={<Products handleLogout={handleLogout} />} />
+      <Route path="/signup" element={loadSignUpPage} />
     </Routes>
   );
 };

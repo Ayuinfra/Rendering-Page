@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, TextField, Typography, Container, Card, CardContent } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 const LoginForm = ({
   email,
@@ -7,7 +8,14 @@ const LoginForm = ({
   handleEmailChange,
   handlePasswordChange,
   handleLogin
-}) => (
+}) => {
+
+  const navigate = useNavigate();
+  const onMoveSignupHandler = ()=>{
+      navigate('../signup')
+  }
+
+  return(
   <Container maxWidth="sm">
     <Card>
       <CardContent>
@@ -32,9 +40,13 @@ const LoginForm = ({
         <Button variant="contained" onClick={handleLogin}>
           Login
         </Button>
+        <Button variant="contained" sx={{marginLeft : '10px'}} onClick={onMoveSignupHandler}>
+          Signup
+        </Button>
       </CardContent>
     </Card>
   </Container>
 );
+}
 
 export default LoginForm;
