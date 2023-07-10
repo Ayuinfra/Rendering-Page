@@ -4,13 +4,16 @@ import Home from "./home/Home";
 import Images from "./images/InnerApp1"
 import { Drawer, IconButton, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
+import CubeCounter from "./cube/InnerApp2";
+
 
 export const Projects = {
   CRUD : "crud",
   IMAGES : "images",
+  CUBE : "cube",
 }
 
-const projectsList = ["CRUD","IMAGES"];
+const projectsList = ["CRUD","IMAGES","CUBE"];
 
 const App = ()=>{
 
@@ -40,6 +43,10 @@ const App = ()=>{
       case "IMAGES" : 
       return (
         <Images/>
+      )
+      case "CUBE" : 
+      return (
+        <CubeCounter/>
       )
       default :
         return(
