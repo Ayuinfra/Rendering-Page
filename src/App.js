@@ -6,14 +6,16 @@ import { Drawer, IconButton, List, ListItem, ListItemText, ListItemIcon } from "
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import CubeCounter from "./cube/InnerApp2";
+import Products from "./shopping/Product";
 
 export const Projects = {
   CRUD: "crud",
   IMAGES: "images",
   CUBE: "cube",
+  SHOPPING : "shopping",
 };
 
-const projectsList = ["CRUD", "IMAGES", "CUBE"];
+const projectsList = ["CRUD", "IMAGES", "CUBE","SHOPPING"];
 
 const App = () => {
   const [currentProject, setCurrentProject] = useState();
@@ -44,6 +46,8 @@ const App = () => {
         return <Images />;
       case "CUBE":
         return <CubeCounter />;
+      case "SHOPPING" :
+        return <Products/>;
       default:
         return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
     }
