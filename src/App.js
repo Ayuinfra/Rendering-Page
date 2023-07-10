@@ -5,7 +5,7 @@ import SignupForm from './signup/SignUpForm';
 import Products from './products/Products';
 
 const App = () => {
-  
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
@@ -72,7 +72,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={loadSignUpPage} />
+      <Route path="/" element={loadLoginPage} />
       <Route path="/login" element={loadLoginPage} />
       <Route path="/home" element={<Products handleLogout={handleLogout} />} />
       <Route path="/signup" element={loadSignUpPage} />
