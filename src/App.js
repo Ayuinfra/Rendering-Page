@@ -13,9 +13,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+
 
   const fetchProducts = async () => {
     try {
@@ -27,8 +25,7 @@ const App = () => {
   };
 
   const handleLogin = () => {
-    // Validate login credentials here
-    // For simplicity, we'll use static data
+ 
     if (email === 'user@example.com' && password === 'password') {
       setIsLoggedIn(true);
     } else {
@@ -37,7 +34,7 @@ const App = () => {
   };
 
   const handleSignup = () => {
-    // Save user data here
+
     alert('Signup successful');
   };
 
@@ -57,9 +54,14 @@ const App = () => {
     setName(event.target.value);
   };
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  
   return (
     <Routes>
-      <>
+      
         <Route path="/login">
           {isLoggedIn ? (
             <Route component={() => <h1>You are already logged in.</h1>} />
@@ -109,7 +111,7 @@ const App = () => {
             </Container>
           )}
         </Route>
-      </>
+      
     </Routes>
   );
 };
