@@ -16,53 +16,34 @@ export const Projects = {
 const projectsList = ["CRUD", "IMAGES", "CUBE"];
 
 const App = () => {
-  //* State to track the current project
-  const [currentProject, setCurrentProject] = useState(); 
- 
-  //* State to track the drawer open/close
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); 
+  const [currentProject, setCurrentProject] = useState();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-
-  //* Handler to close the drawer
   const handleDrawerClose = () => {
     setIsDrawerOpen(false);
   };
 
-
-   //* Handler to open the drawer
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
   };
 
   const onSetCurrentProjectHandler = useCallback((projectName) => {
-    
-    //* Set the current project
     setCurrentProject(projectName);
-
-    //* Close the drawer after setting the project
-    setIsDrawerOpen(false); 
+    setIsDrawerOpen(false);
   }, []);
 
   const onChangeProjectHandler = (projectName) => {
     if (!projectName) {
-
-      //* If no project selected, show the Home component
       return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
     }
 
     switch (projectName) {
-      //* Render the CRUD component
       case "CRUD":
         return <CrudInnerApp />;
-
-      //* Render the Images component
       case "IMAGES":
         return <Images />;
-
-      //* Render the CubeCounter component
       case "CUBE":
         return <CubeCounter />;
-
       default:
         return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
     }
@@ -90,7 +71,7 @@ const App = () => {
           </ListItem>
           {projectsList.map((item, index) => (
             <ListItem key={index} onClick={() => onSetCurrentProjectHandler(item)}>
-              <ListItemText primary={item} />
+              <ListItemText primary={`${index + 1}. ${item}`} />
             </ListItem>
           ))}
         </List>
