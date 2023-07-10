@@ -39,30 +39,30 @@ const App = () => {
     //* Set the current project
     setCurrentProject(projectName);
 
-    // Close the drawer after setting the project
+    //* Close the drawer after setting the project
     setIsDrawerOpen(false); 
   }, []);
 
   const onChangeProjectHandler = (projectName) => {
     if (!projectName) {
 
-      // If no project selected, show the Home component
+      //* If no project selected, show the Home component
       return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
     }
 
     switch (projectName) {
-      // Render the CRUD component
+      //* Render the CRUD component
       case "CRUD":
         return <CrudInnerApp />;
 
-      // Render the Images component
+      //* Render the Images component
       case "IMAGES":
         return <Images />;
 
-      // Render the CubeCounter component
+      //* Render the CubeCounter component
       case "CUBE":
         return <CubeCounter />;
-        
+
       default:
         return <Home onSetCurrentProject={onSetCurrentProjectHandler} />;
     }
