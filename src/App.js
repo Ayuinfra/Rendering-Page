@@ -72,10 +72,10 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={loadLoginPage} />
-     
+      <Route path="/" element={loadSignUpPage} />
+     <Route path="/login" element ={loadLoginPage}/>
       <Route path="/home" element={<Products handleLogout={handleLogout} />} />
-      <Route path="/signup" element={loadSignUpPage} />
+     
     </Routes>
   );
 };
