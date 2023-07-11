@@ -16,10 +16,12 @@ const LoginForm = ({
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setError(''); 
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setError('');
   };
 
   const validateLoginFields = () => {
