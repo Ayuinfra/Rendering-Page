@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, TextField, Typography, Container, Card, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 const LoginForm = ({
-  email,
-  password,
-  handleEmailChange,
-  handlePasswordChange,
   handleLogin
 }) => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const onMoveSignupHandler = () => {
     navigate('../signup');
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   const validateLoginFields = () => {
     if (email.trim() === '' || password.trim() === '') {
-      alert('Please enter email and password');
+      setError('Please enter email and password');
       return false;
     }
     return true;
@@ -25,8 +32,12 @@ const LoginForm = ({
 
   const handleLoginClick = () => {
     if (validateLoginFields()) {
-      handleLogin();
-      navigate('/home');
+      const success = handleLogin(email, password);
+      if (success) {
+        navigate('/home');
+      } else {
+        setError('Invalid email or password');
+      }
     }
   };
 
@@ -37,6 +48,7 @@ const LoginForm = ({
           <Typography variant="h5" component="div" align="center">
             Login
           </Typography>
+          {error && <Typography color="error">{error}</Typography>}
           <TextField
             fullWidth
             label="Email"
