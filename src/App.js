@@ -28,12 +28,12 @@ const App = () => {
     const newUser = { name, email, password };
     setUsers([...users, newUser]);
     setIsLoggedIn(true);
-    navigate('/login');
+    navigate('/');
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate('/login');
+    navigate('/');
   };
 
   const handleEmailChange = (event) => {
@@ -73,7 +73,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={loadLoginPage} />
-      <Route path="/login" element={loadLoginPage} />
+     
       <Route path="/home" element={<Products handleLogout={handleLogout} />} />
       <Route path="/signup" element={loadSignUpPage} />
     </Routes>
