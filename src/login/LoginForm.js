@@ -35,11 +35,10 @@ const LoginForm = ({
   const handleLoginClick = () => {
     if (validateLoginFields()) {
       const success = handleLogin(email, password);
-      if (success) {
+      if (success) 
         navigate('/home');
-      } else {
+       else 
         setError('Invalid email or password');
-      }
     }
   };
 

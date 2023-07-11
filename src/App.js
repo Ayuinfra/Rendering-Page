@@ -6,66 +6,34 @@ import Products from './products/Products';
 
 const App = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [users,setUsers] = useState([])
 
-
-  const handleLogin = () => {
+  const handleLogin = (email,password) => {
     const user = users.find((user) => user.email === email && user.password === password);
-    if (user) {
-      setIsLoggedIn(true);
-      navigate('/home');
-    } else {
-      alert('Invalid login credentials');
-    }
+    if (user)
+      return true;
+    else 
+      return false;
   };
 
-  const handleSignup = () => {
-    const newUser = { name, email, password };
-    setUsers([...users, newUser]);
-    setIsLoggedIn(true);
+  const handleSignup = (userInfo) => {
+    setUsers([...users, userInfo]);
     navigate('/');
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
     navigate('/');
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
   };
 
   const loadLoginPage = (
       <LoginForm
-        email={email}
-        password={password}
-        handleEmailChange={handleEmailChange}
-        handlePasswordChange={handlePasswordChange}
         handleLogin={handleLogin}
       />
     );
 
   const loadSignUpPage = (
       <SignupForm
-        name={name}
-        email={email}
-        password={password}
-        handleNameChange={handleNameChange}
-        handleEmailChange={handleEmailChange}
-        handlePasswordChange={handlePasswordChange}
         handleSignup={handleSignup}
       />
     );
@@ -73,7 +41,6 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={loadLoginPage} />
-     
       <Route path="/home" element={<Products handleLogout={handleLogout} />} />
       <Route path="/signup" element={loadSignUpPage} />
     </Routes>
