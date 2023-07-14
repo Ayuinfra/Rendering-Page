@@ -1,21 +1,20 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import {  legacy_createStore as createStore } from 'redux';
+import CubeCounter from './cubecounter/CubeCounter';
+import counterReducer from './store/reducers/Reducers';
 
-import { Routes, Route  } from "react-router";
-import NotFound from "./notfound/NotFound";
-import Data from "./screens/data/Data";
+const store = createStore(counterReducer);
 
 const App = () => {
-
-
   return (
-       
-      
-          <Routes>
-            <Route exact path="*" element = {<NotFound/>} />
-            <Route exact path="/" element = {<Data/>}/>
-          </Routes>
-          
-
-    
+    <Provider store={store}>
+      <>
+        <h1>Cube Counter App</h1>
+        <CubeCounter />
+      </>
+    </Provider>
   );
 };
-export default App;
+
+export default App
