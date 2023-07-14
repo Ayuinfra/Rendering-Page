@@ -1,9 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import {  legacy_createStore as createStore } from 'redux';
+
+import { legacy_createStore as createStore } from 'redux';
 import CubeCounter from './components/cubecounter/CubeCounter';
 import counterReducer from './store/reducers/Reducers';
-
+import { Provider } from 'react-redux';
 const store = createStore(counterReducer);
 
 const App = () => {
@@ -17,4 +17,4 @@ const App = () => {
   );
 };
 
-export default App
+export default App;
