@@ -3,7 +3,7 @@ import { Button, Paper } from '@mui/material';
 
 const Counter = ({ handleIncrement, handleDecrement }) => {
   return (
-    <Paper component={React.Fragment} elevation={0}>
+    <Paper  elevation={0}>
       <Button variant="contained" color="primary" onClick={handleIncrement}>
         Add
       </Button>
