@@ -7,7 +7,7 @@ const Counter = ({ handleIncrement, handleDecrement }) => {
       <Button variant="contained" color="primary" onClick={handleIncrement}>
         Add
       </Button>
-      <Button variant="contained" color="secondary" onClick={handleDecrement}>
+      <Button variant="contained" color="secondary" onClick={handleDecrement} >
         Subtract
       </Button>
     </Paper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {  legacy_createStore as createStore } from 'redux';
-import CubeCounter from './cubecounter/CubeCounter';
+import CubeCounter from './components/cubecounter/CubeCounter';
 import counterReducer from './store/reducers/Reducers';
 
 const store = createStore(counterReducer);
