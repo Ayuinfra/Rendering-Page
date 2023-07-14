@@ -16,10 +16,10 @@ const Counter = ({ handleIncrement, handleDecrement, handleIncrementBy2, handleD
       </Box>
       <Box marginBottom={1}>
         <Button variant="contained" color="primary" onClick={handleIncrementBy2}>
-          Add by 2
+          Add + 2
         </Button>
         <Button variant="contained" color="secondary" onClick={handleDecrementBy2}>
-          Subtract by 2
+          Subtract - 2
         </Button>
       </Box>
     </Paper>
