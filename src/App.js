@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { legacy_createStore as createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 import CubeCounter from './components/cubecounter/CubeCounter';
 import counterReducer from './store/reducers/Reducers';
-import { Provider } from 'react-redux';
 
-
-const store = createStore(counterReducer);
+const middleware = applyMiddleware(logger);
+const store = createStore(counterReducer, middleware);
 
 const App = () => {
   return (
