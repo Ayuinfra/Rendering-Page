@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 const Cube = () => {
 
   const count = useSelector((state)=>state.count);
-
   return (
     <Container maxWidth="md" sx={{marginTop:"2rem",display :"flexStart"}}>
       <Paper

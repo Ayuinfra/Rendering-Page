@@ -1,14 +1,13 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect} from 'react-redux';
 import Cube from '../cube/Cube';
 import Counter from '../counter/Counter';
 import { increment, decrement, incrementBy2, decrementBy2 } from "../../store/actions/Actions"
 
+const CubeCounter = ({  count,increment,decrement, incrementBy2, decrementBy2 }) => {
 
-const CubeCounter = () => {
   
   const handleIncrement = () => {
-
     increment();
   };
 
@@ -26,7 +25,7 @@ const CubeCounter = () => {
 
   return (
     <>
-      <Cube />
+      <Cube count={count}/>
       <Counter
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
