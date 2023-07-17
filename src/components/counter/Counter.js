@@ -9,10 +9,10 @@ const Counter = ({ handleIncrement, handleDecrement, handleIncrementByTwo, handl
       <Paper elevation={0}>
         <Box marginBottom={1}>
           <Button variant="contained" color="primary" onClick={handleIncrement}>
-            Add
+            Add + 1 
           </Button>
           <Button variant="contained" color="secondary" onClick={handleDecrement} style={{ marginLeft: '10px' }}>
-            Sub
+            Sub - 1
           </Button>
         </Box>
         <Box marginBottom={1}>
