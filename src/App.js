@@ -12,7 +12,7 @@ const store = createStore(counterReducer, middleware);
 const App = () => {
   return (
     <Provider store={store}>
-      <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flexStart" }}>
+      <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flexStart" , marginRight: "10px" }}>
         <>
           <h1>Cube Counter App</h1>
           <CubeCounter />
