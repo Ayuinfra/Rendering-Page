@@ -12,15 +12,15 @@ const store = createStore(counterReducer, middleware);
 const App = () => {
   return (
     <Provider store={store}>
-      <Container maxWidth="md" sx={{marginTop:"2rem",display :"flexStart"}}>
-      <>
-        <h1>Cube Counter App</h1>
-        <CubeCounter />
-      </>
+      <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flexStart" }}>
+        <>
+          <h1>Cube Counter App</h1>
+          <CubeCounter />
+        </>
       </Container>
     </Provider>
-   
-      
+
+
   );
 };
 

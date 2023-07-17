@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 
 const Cube = () => {
 
-  const count = useSelector((state)=>state.count);
+  const count = useSelector((state) => state.count);
   return (
-    <Container maxWidth="md" sx={{marginTop:"2rem",display :"flexStart"}}>
+    <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flexStart" }}>
       <Paper
         style={{
           width: 200,
@@ -23,9 +23,9 @@ const Cube = () => {
         }}
       >
         <Typography variant="h1">{count}</Typography>
-    </Paper>
+      </Paper>
     </Container>
-    
+
   );
 };
 
