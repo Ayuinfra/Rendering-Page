@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Paper } from '@mui/material';
-import { makeStyles } from '@material-ui/core';
+
 
 
 const Counter = ({ handleIncrement, handleDecrement }) => {
