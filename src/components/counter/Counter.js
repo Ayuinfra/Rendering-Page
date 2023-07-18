@@ -2,16 +2,9 @@ import React from 'react';
 import { Button, Paper } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-buttonsContainer: {
-display: 'flex',
-justifyContent: 'center',
-marginTop: theme.spacing(2),
-},
-}));
 
 const Counter = ({ handleIncrement, handleDecrement }) => {
-const classes = useStyles();
+
 
 return (
 
