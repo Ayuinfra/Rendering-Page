@@ -14,16 +14,16 @@ const Counter = ({ handleIncrement, handleDecrement }) => {
 const classes = useStyles();
 
 return (
-<Paper>
-<div className={classes.buttonsContainer}>
-<Button variant="contained" color="primary" onClick={handleIncrement}>
+
+<>
+<Button variant="contained" color="primary" onClick={handleIncrement} >
 Add + 1
 </Button>
 <Button variant="contained" color="secondary" onClick={handleDecrement}>
 Sub - 1
 </Button>
-</div>
-</Paper>
+</>
+
 );
 };
 
