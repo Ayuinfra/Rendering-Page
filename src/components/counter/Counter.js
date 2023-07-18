@@ -1,57 +1,61 @@
 import React from 'react';
-import { Box, Button, Container, Paper } from '@mui/material';
-import { connect } from 'react-redux';
-import { increment, decrement } from '../../store/actions/Actions';
+import { useDispatch } from 'react-redux';
+import { Button, Paper } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
+import { decrement, decrementByTwo, increment, incrementByTwo } from '../../store/reducers/Reducers';
 
-const Counter = ({ handleIncrement, handleDecrement, handleIncrementByTwo, handleDecrementByTwo }) => {
-  return (
-    <Container maxWidth="md" sx={{ marginTop: "1rem", display: "flexStart" }}>
-      <Paper elevation={0}>
-        <Box marginBottom={1}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleIncrement}>
-            Add + 1
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleDecrement}
-            style={{ marginLeft: '10px' }}>
-            Sub - 1
-          </Button>
-        </Box>
-        <Box marginBottom={1}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleIncrementByTwo}
-          >
-            Add + 2
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleDecrementByTwo}
-            style={{ marginLeft: '10px' }}
-          >
-            Sub - 2
-          </Button>
-        </Box>
 
-      </Paper>
-    </Container>
 
-  );
+
+
+const Counter = () => {
+
+const dispatch = useDispatch();
+
+const handleIncrement = () => {
+dispatch(increment());
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleIncrement: () => dispatch(increment(1)),
-    handleDecrement: () => dispatch(decrement(1)),
-    handleIncrementByTwo: () => dispatch(increment(2)),
-    handleDecrementByTwo: () => dispatch(decrement(2)),
-  };
+const handleDecrement = () => {
+dispatch(decrement());
 };
-export default connect(null, mapDispatchToProps)(Counter);
+
+const handleIncrementByTwo = () => {
+dispatch(incrementByTwo());
+};
+
+const handleDecrementByTwo = () => {
+dispatch(decrementByTwo());
+};
+
+return (
+<Paper>
+<>
+<Button variant="contained" color="primary" onClick={handleIncrement}>
+Add + 1
+</Button>
+<Button variant="contained" color="secondary" onClick={handleDecrement}>
+Sub - 1
+</Button>
+</>
+<>
+<Button
+variant="contained"
+color="primary"
+onClick={handleIncrementByTwo}
+>
+Add + 2
+</Button>
+<Button
+variant="contained"
+color="secondary"
+onClick={handleDecrementByTwo}
+>
+Sub - 2
+</Button>
+</>
+</Paper>
+);
+};
+
+export default Counter;

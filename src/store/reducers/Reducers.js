@@ -1,24 +1,15 @@
-import { DECREMENT, INCREMENT } from "../actions/Actions";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  count: 0,
-};
+const counterSlice = createSlice({
+name: 'counter',
+initialState: 0,
+reducers: {
+increment: (state) => state + 1,
+decrement: (state) => state - 1,
+incrementByTwo: (state) => state + 2,
+decrementByTwo: (state) => state - 2,
+},
+});
 
-const counterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case INCREMENT:
-      return {
-        ...state,
-        count: state.count + action.payload,
-      };
-    case DECREMENT:
-      return {
-        ...state,
-        count: state.count - action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-export default counterReducer;
+export const { increment, decrement, incrementByTwo, decrementByTwo } = counterSlice.actions;
+export default counterSlice.reducer;

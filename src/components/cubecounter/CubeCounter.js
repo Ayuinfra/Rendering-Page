@@ -1,25 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Cube from '../cube/Cube';
+import Cube from '../cube/Cube'
 import Counter from '../counter/Counter';
-import { increment, decrement } from "../../store/actions/Actions";
 
-const CubeCounter = ({ count, increment, decrement }) => {
+
+
+
+const CubeCounter = () => {
+
+
   return (
     <>
-      <Cube count={count} />
-      <Counter handleIncrement={increment} handleDecrement={decrement} />
+      <Cube />
+      
+      <Counter />
     </>
+   
+    
+
   );
 };
 
-const mapStateToProps = (state) => ({
-  count: state.count,
-});
-
-const mapDispatchToProps = {
-  increment,
-  decrement,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CubeCounter);
+export default CubeCounter;
