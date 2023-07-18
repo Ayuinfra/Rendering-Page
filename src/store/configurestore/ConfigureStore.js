@@ -1,13 +1,14 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
-import counterReducer from '../reducers/Reducers';
 
-const rootReducer = combineReducers({
-count: counterReducer,
-});
+import logger from 'redux-logger';
+
+import rootReducer from '../rootreducer/RootReducer';
+
 
 const middleware = applyMiddleware(logger);
+
 const store = createStore(rootReducer, middleware);
+
 
 export default store;
 

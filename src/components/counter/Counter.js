@@ -1,34 +1,30 @@
 import React from 'react';
-import {  Container } from '@mui/material';
+import { Button, Paper } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
 
-
+const useStyles = makeStyles((theme) => ({
+buttonsContainer: {
+display: 'flex',
+justifyContent: 'center',
+marginTop: theme.spacing(2),
+},
+}));
 
 const Counter = ({ handleIncrement, handleDecrement }) => {
-  return (
-    <Container maxWidth="md" sx={{ marginTop: "1rem", display: "flexStart" }}>
-      {/* <Paper elevation={0}>
-        <Box marginBottom={1}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleIncrement}>
-            Add + 1
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleDecrement}
-            style={{ marginLeft: '10px' }}>
-            Sub - 1
-          </Button>
-        </Box>
-       
+const classes = useStyles();
 
-      </Paper> */}
-    </Container>
-
-  );
+return (
+<Paper>
+<div className={classes.buttonsContainer}>
+<Button variant="contained" color="primary" onClick={handleIncrement}>
+Add + 1
+</Button>
+<Button variant="contained" color="secondary" onClick={handleDecrement}>
+Sub - 1
+</Button>
+</div>
+</Paper>
+);
 };
-
 
 export default Counter;

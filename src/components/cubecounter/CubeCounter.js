@@ -5,21 +5,21 @@ import Counter from '../counter/Counter';
 import { increment, decrement } from "../../store/actions/Actions";
 
 const CubeCounter = ({ count, increment, decrement }) => {
-  return (
-    <>
-      <Cube count={count} />
-      <Counter handleIncrement={increment} handleDecrement={decrement} />
-    </>
-  );
+return (
+<>
+<Cube count={count} />
+<Counter handleIncrement={increment} handleDecrement={decrement} />
+</>
+);
 };
 
 const mapStateToProps = (state) => ({
-  count: state.count,
+count: state.count.count,
 });
 
 const mapDispatchToProps = {
-  increment,
-  decrement,
+increment,
+decrement,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CubeCounter);
