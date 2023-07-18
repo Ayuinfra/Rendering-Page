@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     background: 'grey',
-    color: 'grey',
+    color: 'black',
     fontSize: 48,
     fontWeight: 'bold',
   },
