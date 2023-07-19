@@ -63,21 +63,21 @@ const Cube = () => {
   return (
     <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <>
-      {count === 0 && showFactorialChip}
+      {count === 0 && showFactorialChip()}
 
         {(count >= 1 && count <= 7) && (
           <>
-            {isEven && showEvenChip}
-            {isOdd && showOddChip}
-            {isPrimeNumber && showPrimeChip}
-            {showFactorialChip}
+            {isEven && showEvenChip()}
+            {isOdd && showOddChip()}
+            {isPrimeNumber && showPrimeChip()}
+            {showFactorialChip()}
           </>
         )}
         {count > 7 && (
           <>
-            {isEven && showEvenChip}
-            {isOdd && showOddChip}
-            {isPrimeNumber && showPrimeChip}
+            {isEven && showEvenChip()}
+            {isOdd && showOddChip()}
+            {isPrimeNumber && showPrimeChip()}
           </>
         )}
       </>
