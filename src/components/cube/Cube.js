@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography, Chip } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import CustomChip from '../chip/Chip';
