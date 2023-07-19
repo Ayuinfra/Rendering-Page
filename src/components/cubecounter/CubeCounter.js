@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Cube from '../cube/Cube';
 import Counter from '../counter/Counter';
-import { increment, decrement } from "../../store/actions/Actions";
+import { increment,decrement } from '../../store/reducers/Reducers';
 
 const CubeCounter = ({ count, increment, decrement }) => {
   return (
