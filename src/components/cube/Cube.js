@@ -2,6 +2,7 @@ import React from 'react';
 import { Paper, Typography, Chip } from '@mui/material';
 import { Container } from '@mui/system';
 import { useSelector } from 'react-redux';
+import CustomChip from '../chip/Chip';
 
 const isPrime = (num) => {
   if (num <= 1) return false;
@@ -16,7 +17,7 @@ const isPrime = (num) => {
   return true;
 };
 
-const getFactorial = (num) => {
+export const getFactorial = (num) => {
   if (num <= 1) return 1;
   return num * getFactorial(num - 1);
 };
@@ -27,31 +28,56 @@ const Cube = () => {
   const isEven = count % 2 === 0;
   const isPrimeNumber = isPrime(count);
 
+  const showEvenChip = ()=>(
+    <CustomChip
+      label='This Num is even'
+      color="primary"
+      count={count}
+    />
+  )
+
+  const showOddChip = ()=>(
+    <CustomChip
+      label='This Num is odd'
+      color="secondary"
+      count={count}
+    />
+  )
+
+  const showPrimeChip = ()=>(
+    <CustomChip
+      label='This num is prime'
+      color="success"
+      count={count}
+    />
+  )
+
+  const showFactorialChip = ()=>(
+    <CustomChip
+      label='Factorial'
+      color="info"
+      count={count}
+    />
+  )
+
   return (
     <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <>
-      {count <= 0 && (
-          <>
-            <Chip label={`Factorial: ${getFactorial(count)}`} color="info" style={{ margin: '0.5rem' }} />
-          </>
-        )}
+      {count === 0 && showFactorialChip}
+
         {(count >= 1 && count <= 7) && (
           <>
-            {isEven && <Chip label="This num is even" color="primary" style={{ margin: '0.5rem' }} />}
-            {isOdd && <Chip label="This num is odd" color="secondary" style={{ margin: '0.5rem' }} />}
-            {isPrimeNumber && (
-              <Chip label="This num is prime" color="success" style={{ margin: '0.5rem' }} />
-            )}
-            <Chip label={`Factorial: ${getFactorial(count)}`} color="info" style={{ margin: '0.5rem' }} />
+            {isEven && showEvenChip}
+            {isOdd && showOddChip}
+            {isPrimeNumber && showPrimeChip}
+            {showFactorialChip}
           </>
         )}
         {count > 7 && (
           <>
-            {isEven && <Chip label="This num is even" color="primary" style={{ margin: '0.5rem' }} />}
-            {isOdd && <Chip label="This num is odd" color="secondary" style={{ margin: '0.5rem' }} />}
-            {isPrimeNumber && (
-              <Chip label="This num is prime" color="success" style={{ margin: '0.5rem' }} />
-            )}
+            {isEven && showEvenChip}
+            {isOdd && showOddChip}
+            {isPrimeNumber && showPrimeChip}
           </>
         )}
       </>
