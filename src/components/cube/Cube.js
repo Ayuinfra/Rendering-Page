@@ -30,7 +30,12 @@ const Cube = () => {
   return (
     <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <>
-        {count <= 7 && (
+      {count <= 0 && (
+          <>
+            <Chip label={`Factorial: ${getFactorial(count)}`} color="info" style={{ margin: '0.5rem' }} />
+          </>
+        )}
+        {(count >= 1 && count <= 7) && (
           <>
             {isEven && <Chip label="This num is even" color="primary" style={{ margin: '0.5rem' }} />}
             {isOdd && <Chip label="This num is odd" color="secondary" style={{ margin: '0.5rem' }} />}
