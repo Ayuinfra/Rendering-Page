@@ -1,24 +1,32 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import CubeCounter from "../src/components/cubecounter/CubeCounter"
-import { Container } from '@mui/material';
-import store from './store/configurestore/ConfigureStore';
+// App.js
+import React from "react";
+import { Container, Typography } from "@material-ui/core";
+import ProductGrid from "./components/productgrid/ProductGrid";
+import store from "./redux/store/Store";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { Provider } from "react-redux";
 
-
-
+const theme = createTheme({
+    // Customize your theme here
+});
 
 const App = () => {
-return (
-<Provider store={store}>
-<Container
-maxWidth="md"
-sx={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}
->
-<h1>Cube Counter App</h1>
-<CubeCounter />
-</Container>
-</Provider>
-);
+    return (
+        // Wrap the entire app with the Provider component
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Container>
+                    <Typography variant="h4" align="center" gutterBottom>
+                        Jewelry Collection
+                    </Typography>
+                    {/* Render the ProductGrid component */}
+                    <ProductGrid />
+                </Container>
+            </ThemeProvider>
+        </Provider>
+    );
 };
 
 export default App;
