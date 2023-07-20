@@ -19,7 +19,7 @@ const App = () => {
                 <CssBaseline />
                 <Container>
                     <Typography variant="h4" align="center" gutterBottom>
-                        Jewelry Collection
+                        Jewellery Collection
                     </Typography>
                     {/* Render the ProductGrid component */}
                     <ProductGrid />

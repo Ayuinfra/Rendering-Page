@@ -8,11 +8,11 @@ import ProductCard from "../productcomponents/ProductComponents";
 const ProductGrid = () => {
   const dispatch = useDispatch();
 
-  // Access the state from the correct path (productReducer in this case)
+  //* Access the state from the correct path (productReducer in this case)
   const { loading, products, error } = useSelector((state) => state.productReducer);
 
   useEffect(() => {
-    // Fetch products when the component mounts
+    //* Fetch products when the component mounts
     dispatch(fetchProduct());
   }, [dispatch]);
 
@@ -27,7 +27,7 @@ const ProductGrid = () => {
   return (
     <Grid container spacing={2}>
       {products.map((product) => (
-        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+        <Grid item key={product.id} sm={6} md={4} lg={3}>
           <ProductCard product={product} />
         </Grid>
       ))}
