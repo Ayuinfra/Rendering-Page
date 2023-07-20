@@ -8,12 +8,12 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 
 const theme = createTheme({
-    // Customize your theme here
+    //* Customize your theme here
 });
 
 const App = () => {
     return (
-        // Wrap the entire app with the Provider component
+        //* Wrap the entire app with the Provider component
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
