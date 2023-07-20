@@ -14,18 +14,20 @@ const theme = createTheme({
 const App = () => {
     return (
         //* Wrap the entire app with the Provider component
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container>
-                    <Typography variant="h4" align="center" gutterBottom>
-                        Jewellery Collection
-                    </Typography>
-                    {/* Render the ProductGrid component */}
-                    <ProductGrid />
-                </Container>
-            </ThemeProvider>
-        </Provider>
+        <Container maxWidth='md' sx={{marginTop:'2rem',display:'flexStart'}}>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Container>
+                        <Typography variant="h4" align="center" >
+                            Jewellery Collection
+                        </Typography>
+                        <ProductGrid />
+                    </Container>
+                </ThemeProvider>
+            </Provider>
+        </Container>
+
     );
 };
 
