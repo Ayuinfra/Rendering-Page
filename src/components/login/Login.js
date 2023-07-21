@@ -1,45 +1,80 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/actions/AuthAction";
-import { Form, useNavigate } from "react-router-dom";
-import { useFormAction } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button, TextField, Typography, Container, Card, CardContent } from '@mui/material';
+import { useNavigate } from 'react-router';
 
-const Login = () => {
-    const { handleSubmit, control, errors } = useFormAction();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const Login = ({
+  handleLogin
+}) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-    const onSubmit = (data) => {
-        dispatch(loginUser(data));
-        navigate("/home");
-    };
+  const onMoveSignupHandler = () => {
+    navigate('../signup');
+  };
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <>
-                <label>Username</label>
-                <Form
-                    as={<input />}
-                    control={control}
-                    name="username"
-                    rules={{ required: "Username is required" }}
-                />
-                {errors.username && <p>{errors.username.message}</p>}
-            </>
-            <>
-                <label>Password</label>
-                <Form
-                    as={<input />}
-                    control={control}
-                    name="password"
-                    type="password"
-                    rules={{ required: "Password is required" }}
-                />
-                {errors.password && <p>{errors.password.message}</p>}
-            </>
-            <button type="submit">Login</button>
-        </form>
-    );
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setError(''); 
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError('');
+  };
+
+  const validateLoginFields = () => {
+    if (email.trim() === '' || password.trim() === '') {
+      setError('Please enter email and password');
+      return false;
+    }
+    return true;
+  };
+
+  const handleLoginClick = () => {
+    if (validateLoginFields()) {
+      const success = handleLogin(email, password);
+      if (success) 
+        navigate('/home');
+       else 
+        setError('Invalid email or password');
+    }
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="div" align="center">
+            Login
+          </Typography>
+          {error && <Typography color="error">{error}</Typography>}
+          <TextField
+            fullWidth
+            label="Email"
+            value={email}
+            onChange={handleEmailChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            margin="normal"
+          />
+          <Button variant="contained" onClick={handleLoginClick}>
+            Login
+          </Button>
+          <Button variant="contained" sx={{ marginLeft: '10px' }} onClick={onMoveSignupHandler}>
+            Signup
+          </Button>
+        </CardContent>
+      </Card>
+    </Container>
+  );
 };
 
 export default Login;
