@@ -1,45 +1,83 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { signupUser } from "../../redux/actions/AuthAction";
-import { Form, useFormAction, useNavigate } from "react-router-dom";
+import React, { useRef} from 'react';
+import { Button, TextField, Typography, Container, Card, CardContent } from '@mui/material';
+import {  useNavigate } from 'react-router-dom';
 
+const Signup = ({
+  handleSignup
+}) => {
 
-const Signup = () => {
-    const { handleSubmit, control, errors } = useFormAction();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  const nameRef = useRef();
+  const passwordRef = useRef();
 
-    const onSubmit = (data) => {
-        dispatch(signupUser(data));
-        navigate("/home");
-    };
+  const handleSubmit = () => {
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <>
-                <label>Username</label>
-                <Form
-                    as={<input />}
-                    control={control}
-                    name="username"
-                    rules={{ required: "Username is required" }}
-                />
-                {errors.username && <p>{errors.username.message}</p>}
-            </>
-            <>
-                <label>Password</label>
-                <Form
-                    as={<input />}
-                    control={control}
-                    name="password"
-                    type="password"
-                    rules={{ required: "Password is required" }}
-                />
-                {errors.password && <p>{errors.password.message}</p>}
-            </>
-            <button type="submit">Signup</button>
-        </form>
-    );
+    const name = nameRef.current.value.trim();
+    const email  = emailRef.current.value.trim();
+    const password  = passwordRef.current.value.trim();
+
+    if (name === '' || email === '' || password === '') {
+        alert('Please fill in all fields');
+    } else {
+
+      const obj = {
+        name : name,
+        email : email,
+        password : password
+      }
+      handleSignup(obj);
+      clearForm();
+      navigate('/');
+    }
+  };
+
+  const clearForm = () => {
+    nameRef.current.value = '';
+    emailRef.current.value = '';
+    passwordRef.current.value = '';
+  };
+
+  const handleBackClick = () => {
+    navigate('/login');
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="div" align="center">
+            Signup
+          </Typography>
+          <TextField
+            fullWidth
+            inputRef={nameRef}
+            label="Name"
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            inputRef={emailRef}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Password"
+            type="password"
+            inputRef={passwordRef}
+            margin="normal"
+          />
+          <Button variant="contained" onClick={handleSubmit}>
+            Signup
+          </Button>
+          <Button variant="contained" sx={{ marginLeft: '10px' }} onClick={handleBackClick}>
+            Back
+          </Button>
+        </CardContent>
+      </Card>
+    </Container>
+  );
 };
 
 export default Signup;
