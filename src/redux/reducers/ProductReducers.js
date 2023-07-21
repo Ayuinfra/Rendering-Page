@@ -1,5 +1,5 @@
-
 import { FETCH_PRODUCT_FAILURE, FETCH_PRODUCT_REQUEST, FETCH_PRODUCT_SUCCESS } from "../actions/ActionType";
+
 
 const initialState = {
     loading: false,
@@ -7,8 +7,7 @@ const initialState = {
     error: "",
 };
 
-
-//* Reducer to handle product fetching state
+// Reducer to handle product fetching state
 const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_PRODUCT_REQUEST:
@@ -28,7 +27,8 @@ const productReducer = (state = initialState, action) => {
                 products: [],
                 error: action.payload,
             };
-        default: return state;
+        default:
+            return state;
     }
 };
 

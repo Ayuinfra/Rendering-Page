@@ -1,10 +1,9 @@
 // ProductGrid.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../../redux/actions/ProductAction";
 import { Grid, CircularProgress } from "@material-ui/core";
 import ProductCard from "../productcomponents/ProductComponents";
-
+import { fetchProducts } from "../../redux/actions/ProductAction"
 const ProductGrid = () => {
   const dispatch = useDispatch();
 
@@ -13,7 +12,7 @@ const ProductGrid = () => {
 
   useEffect(() => {
     //* Fetch products when the component mounts
-    dispatch(fetchProduct());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   if (loading) {
@@ -22,7 +21,7 @@ const ProductGrid = () => {
 
   if (error) {
     return <>
-    Error: {error}
+      Error: {error}
     </>;
   }
 
