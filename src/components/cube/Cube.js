@@ -28,7 +28,7 @@ const Cube = () => {
   const isEven = count % 2 === 0;
   const isPrimeNumber = isPrime(count);
 
-  const showEvenChip = ()=>(
+  const showEvenChip = () => (
     <CustomChip
       label='This Num is even'
       color="primary"
@@ -36,7 +36,7 @@ const Cube = () => {
     />
   )
 
-  const showOddChip = ()=>(
+  const showOddChip = () => (
     <CustomChip
       label='This Num is odd'
       color="secondary"
@@ -44,7 +44,7 @@ const Cube = () => {
     />
   )
 
-  const showPrimeChip = ()=>(
+  const showPrimeChip = () => (
     <CustomChip
       label='This num is prime'
       color="success"
@@ -52,7 +52,7 @@ const Cube = () => {
     />
   )
 
-  const showFactorialChip = ()=>(
+  const showFactorialChip = () => (
     <CustomChip
       label='Factorial'
       color="info"
@@ -63,14 +63,14 @@ const Cube = () => {
   return (
     <Container maxWidth="md" sx={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <>
-      {count < 0 && (
+        {count < 0 && (
           <>
             {isEven && showEvenChip()}
             {isOdd && showOddChip()}
             {isPrimeNumber && showPrimeChip()}
           </>
         )}
-      {count === 0 && showFactorialChip()}
+        {count === 0 && showFactorialChip()}
 
         {(count >= 1 && count <= 7) && (
           <>
